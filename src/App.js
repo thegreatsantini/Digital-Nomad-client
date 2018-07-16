@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { SERVER_URL } from 'constants';
+import { SERVER_URL } from './constants';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from './layout/Nav'
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import Home from './Home';
-import User from './User'
+import UserProfile from './User'
 import './App.css';
 
 
@@ -31,6 +31,7 @@ class App extends Component {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => {
+          console.log("response.data in getUser() is ", response.data)
           this.setState({
             user: response.data.user
           });
@@ -59,7 +60,7 @@ class App extends Component {
             <div className="container">
               <Nav user={this.state.user} updateUser={this.getUser} />
 
-              <Route path="/user" component={User} />
+              <Route path="/user" component={UserProfile} />
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
               <Route exact path='/' component={() => (<Home user={this.state.user} updateUser={this.getUser}  />)} />
