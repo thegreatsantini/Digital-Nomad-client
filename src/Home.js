@@ -9,7 +9,7 @@ class Home extends Component {
         return (
             <div>
                 This is the home page
-                {this.props.user}
+                {this.props.user ? this.props.user.name : "Login please"}
             </div>
         );
     }

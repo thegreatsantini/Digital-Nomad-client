@@ -5,14 +5,12 @@ import { SERVER_URL } from 'constants';
 class User extends React.Component {
 
     componentDidMount = () => {
-        Axios.get('http://localhost:8080/profile').then((data) => console.log(data))
+        Axios.get(SERVER_URL + '/profile').then((data) => console.log(data))
     }
     render() {
         return (<div>
-            URL: {SERVER_URL}
-        </div>)
-
-
+                    URL: {SERVER_URL}
+                </div>)
     }
 
 }
