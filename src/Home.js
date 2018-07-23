@@ -10,6 +10,7 @@ class Home extends Component {
             <div>
                 This is the home page
                 {this.props.user ? this.props.user.name : "Login please"}
+                
             </div>
         );
     }
