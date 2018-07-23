@@ -15,7 +15,6 @@ class AmbassadorRegistration extends Component {
 
     handleNameChange = (e) => {
         this.setState({ name: e.target.value })
-        }
     }
 
     handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
@@ -36,8 +35,7 @@ class AmbassadorRegistration extends Component {
     }
 
     render() {
-    console.log('here')
-
+    
         if (this.props.user) { return (<Redirect to="/" />); }
 
         return (
