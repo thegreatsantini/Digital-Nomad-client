@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { SERVER_URL } from './constants';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Nav from './layout/Nav'
+import NavBar from './layout/NavBar'
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import Home from './Home';
@@ -58,8 +58,7 @@ class App extends Component {
         <Router>
           <div>
             <div className="container">
-              <Nav user={this.state.user} updateUser={this.getUser} />
-
+              <NavBar user={this.state.user} updateUser={this.getUser} />
               <Route path="/user" component={UserProfile} />
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
