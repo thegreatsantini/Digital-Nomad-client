@@ -14,15 +14,11 @@ class AmbassadorRegistration extends Component {
     }
 
     handleNameChange = (e) => {
-        this.setState({ name: e.target.value }), () => {
-            console.log('something')
-            console.log(this.state.name)
-        }
+        this.setState({ name: e.target.value })
     }
 
     handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
     handlePasswordChange = (e) => { this.setState({ password: e.target.value }); }
-
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted');
@@ -39,6 +35,7 @@ class AmbassadorRegistration extends Component {
     }
 
     render() {
+    
         if (this.props.user) { return (<Redirect to="/" />); }
 
         return (
