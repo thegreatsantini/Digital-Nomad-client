@@ -1,16 +1,19 @@
 import React from "react";
-import Axios from "axios";
-import { SERVER_URL } from 'constants';
+// import Axios from "axios";
+// import { SERVER_URL } from 'constants';
 
 class User extends React.Component {
 
     componentDidMount = () => {
-        Axios.get(SERVER_URL + '/profile').then((data) => console.log(data))
-    }
+        console.log(this.props.user)
+    };
+    
     render() {
-        return (<div>
-                    URL: {SERVER_URL}
-                </div>)
+        return (
+            <div>
+                Home Component
+                { this.props.user }
+            </div>)
     }
 
 }
