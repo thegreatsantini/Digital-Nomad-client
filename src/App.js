@@ -6,7 +6,6 @@ import Navigation from './layout/Navigation'
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import Home from './Home';
-import User from './User'
 import './App.css';
 import AddressBook from './AddressBook';
 
@@ -18,7 +17,7 @@ class App extends Component {
       user: null,
       name: null,
       id: null,
-      saved: null
+      savedContacts: []
     }
   }
 
@@ -39,8 +38,8 @@ class App extends Component {
           this.setState({
             user: response.data.user,
             name:response.data.user.name,
-            id: response.data.user.id,
-            save: response.data.user.saved
+            id: response.data.user._id,
+            savedContacts: response.data.user.savedContacts
           });
         })
         .catch(err => {
@@ -66,11 +65,11 @@ class App extends Component {
           <div>
             <div >
               <Navigation user={this.state.user} updateUser={this.getUser} />
-              <Route path='/addressbook' component={()=> (<AddressBook savedContacts={this.state.saved} updateUser={this.getUser}/>)} />
-              <Route path="/user" component={() => (<User user={this.state.user} updateUser={this.getUser} />)} />
+              <Route path='/addressbook' component={()=> (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id}/>)} />
+              {/* <Route path="/user" component={() => (<User user={this.state.user} updateUser={this.getUser} />)} /> */}
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
-              <Route exact path='/' component={() => (<Home name={this.state.name} updateUser={this.getUser}  />)} />
+              <Route exact path='/' component={() => (<Home _id={this.state.id} name={this.state.name} updateUser={this.getUser} savedContacts={this.state.savedContacts} />)} />
             </div>
           </div>
         </Router>
