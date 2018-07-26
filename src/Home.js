@@ -12,13 +12,10 @@ class Home extends Component {
             key: 1
         };
     }
-
-    componentDidMount = () => {
-        console.log( 'Home comp:', this.props.user)
-    };
-
+    // componentDidMount = () => {
+    //     console.log( 'Home comp:', this.props._id)
+    // };
     handleSelect(key) {
-
         this.setState({ key });
     }
 
@@ -31,10 +28,10 @@ class Home extends Component {
                     id="controlled-tab-example"
                 >
                     <Tab eventKey={1} title="Address Book">
-                        <AddressBook user={this.props.user} />
+                        <AddressBook list={this.props.savedContacts}  userID={this.props._id} />
                     </Tab>
                     <Tab eventKey={2} title="Send post card">
-                        send card here {this.props.user}
+                        send card here {this.props.name}
                     </Tab>
                     <Tab eventKey={3} title="Settings">
                         Settings
