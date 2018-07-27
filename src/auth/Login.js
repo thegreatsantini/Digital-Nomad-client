@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import {
+    FormGroup,
+    ControlLabel,
+    Button,
+    Form,
+    FormControl,
+    Col
+} from 'react-bootstrap';
 import axios from 'axios';
 import { SERVER_URL } from '../constants';
 
@@ -37,17 +45,41 @@ class Login extends Component {
             <div>
                 <br />
                 <h2>Log into your account</h2><br />
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input value={this.state.email} onChange={this.handleEmailChange} type="text" name="email" className="form-control" placeholder="Email goes here" />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input value={this.state.password} onChange={this.handlePasswordChange} type="password" name="password" className="form-control" placeholder="Secret things go here" />
-                    </div>
-                    <input type = "submit" value = "Log me in!" className="btn btn-success" />
-                </form>
+                <Form onSubmit={this.handleSubmit} horizontal>
+                    <FormGroup controlId="formHorizontalEmail">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Email
+                        </Col>
+                        <Col sm={5}>
+                            <FormControl
+                                type="email"
+                                placeholder="Email"
+                                value={this.state.email}
+                                onChange={this.handleEmailChange}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Password
+                        </Col>
+                        <Col sm={5}>
+                            <FormControl
+                                type="password"
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChange={this.handlePasswordChange}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col smOffset={2} sm={10}>
+                            <Button type="submit">Sign in</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
             </div>
         );
     }
