@@ -53,7 +53,7 @@ class AmbassadorRegistration extends Component {
                 <h3>Sign up to get started</h3>
                 <br />
                 <Form onSubmit={this.handleSubmit} horizontal>
-                    {/* <FormGroup controlId="formHorizontalEmail">
+                    <FormGroup controlId="formHorizontalEmail">
                         <Col componentClass={ControlLabel} sm={2}>
                             Name
                         </Col>
@@ -65,7 +65,7 @@ class AmbassadorRegistration extends Component {
                                 onChange={this.handleNameChange}  
                                 />
                         </Col>
-                    </FormGroup> */}
+                    </FormGroup>
 
                     <FormGroup controlId="formHorizontalEmail">
                         <Col componentClass={ControlLabel} sm={2}>

@@ -37,9 +37,9 @@ class App extends Component {
           console.log("response.data in getUser() is ", response.data)
           this.setState({
             user: response.data.user,
-            name:response.data.user.name,
+            name: response.data.user.name,
             id: response.data.user._id,
-            savedContacts: response.data.user.savedContacts
+            savedContacts: response.data.user.contacts
           });
         })
         .catch(err => {
@@ -65,7 +65,7 @@ class App extends Component {
           <div>
             <div >
               <Navigation user={this.state.user} updateUser={this.getUser} />
-              <Route path='/addressbook' component={()=> (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id}/>)} />
+              <Route path='/addressbook' component={() => (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id} />)} />
               {/* <Route path="/user" component={() => (<User user={this.state.user} updateUser={this.getUser} />)} /> */}
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
