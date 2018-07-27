@@ -20,13 +20,14 @@ class AddressBook extends Component {
         };
     }
 
-componentDidMount = () => {
-    // console.log('addressbook:', this.props.userID)
-    // console.log('addressbook:', this.props.thing)
-}  
+    componentDidMount = () => {
+        // console.log('addressbook:', this.props.updateUser)
+        // console.log('addressbook:', this.props.thing)
+    }
 
     render() {
-        const tableBody = this.props.list.map((val, i) => {
+        let list = this.props.list || [];
+        const tableBody = list.map((val, i) => {
             return (
                 <tr>
                     <td>{i + 1}</td>
@@ -58,7 +59,7 @@ componentDidMount = () => {
                 </Table>
                 <br />
                 <br />
-                <NewAddressForm userID={this.props.userID}/>
+                <NewAddressForm userID={this.props.userID} updateUser={this.props.updateUser} />
             </div>
         );
 
