@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddressBook from './AddressBook'
+import SendPostCard from './SendPostCard';
 
 class Home extends Component {
     constructor(props, context) {
@@ -17,7 +18,7 @@ class Home extends Component {
     };
     handleSelect(key) {
         this.setState({ key });
-    }
+    };
 
     render() {
         return (
@@ -28,10 +29,10 @@ class Home extends Component {
                     id="controlled-tab-example"
                 >
                     <Tab eventKey={1} title="Address Book">
-                        <AddressBook list={this.props.savedContacts}  userID={this.props._id} updateUser={this.props.updateUser} />
+                        <AddressBook list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser} />
                     </Tab>
                     <Tab eventKey={2} title="Send post card">
-                        send card here {this.props.name}
+                        <SendPostCard list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser}/>
                     </Tab>
                     <Tab eventKey={3} title="Settings">
                         Settings
