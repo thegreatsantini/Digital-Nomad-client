@@ -23,9 +23,6 @@ class NewAddressForm extends React.Component {
         };
     }
 
-    componentDidMount = () => {
-        // console.log(this.props.updateUser)
-    };
 
     handleChange = event => {
         this.setState({
@@ -35,8 +32,6 @@ class NewAddressForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
-        // console.log(this.props.updateUser)
         Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state)
             .then(result => {
                 console.log('Success', result);
@@ -46,8 +41,6 @@ class NewAddressForm extends React.Component {
             })
             .catch(err => {
                 console.log('Error', err);
-                // console.log('Error');
-                // console.log(this.state)
             });
     };
 
@@ -57,14 +50,14 @@ class NewAddressForm extends React.Component {
                 <Form onSubmit={this.handleSubmit} horizontal>
                     <FormGroup controlId="name">
                         <Col componentClass={ControlLabel} sm={2}>
-                            Name
+                            Full Name
                         </Col>
                         <Col sm={5}>
                             <FormControl
                                 value={this.state.name}
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="Name"
+                                placeholder="Muffin Man"
                             />
                         </Col>
                     </FormGroup>
@@ -77,7 +70,7 @@ class NewAddressForm extends React.Component {
                                 value={ this.state.street } 
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="Street"
+                                placeholder="Drury Lane"
                             />
                         </Col>
                     </FormGroup>
@@ -91,7 +84,7 @@ class NewAddressForm extends React.Component {
                                 value={ this.state.city }
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="City"
+                                placeholder="Prince Edwards Kingdom"
                             />
                         </Col>
                     </FormGroup>
@@ -105,12 +98,12 @@ class NewAddressForm extends React.Component {
                                 value={this.state.state}
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="State"
+                                placeholder="La La Land"
                             />
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="zip">
+                    <FormGroup controlId="zipcode">
                         <Col componentClass={ControlLabel} sm={2}>
                             ZipCode
                         </Col>
@@ -119,7 +112,7 @@ class NewAddressForm extends React.Component {
                                 value={this.state.zipcode}
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="ZipCode"
+                                placeholder="98028"
                             />
                         </Col>
                     </FormGroup>
@@ -133,7 +126,7 @@ class NewAddressForm extends React.Component {
                                 value={this.state.email}
                                 onChange={this.handleChange}
                                 type="email"
-                                placeholder="email"
+                                placeholder="muffins@yum.com"
                             />
                         </Col>
                     </FormGroup>

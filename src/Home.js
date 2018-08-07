@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddressBook from './AddressBook'
-import SendPostCard from './SendPostCard';
+import SendPostCardForm from './SendPostCardForm';
 
 class Home extends Component {
     constructor(props, context) {
@@ -32,7 +32,7 @@ class Home extends Component {
                         <AddressBook list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser} />
                     </Tab>
                     <Tab eventKey={2} title="Send post card">
-                        <SendPostCard list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser}/>
+                        <SendPostCardForm list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser}/>
                     </Tab>
                     <Tab eventKey={3} title="Settings">
                         Settings
