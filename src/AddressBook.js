@@ -36,6 +36,7 @@ class AddressBook extends Component {
                     <td>{val.city} </td>
                     <td>{val.state} </td>
                     <td>{val.zipcode} </td>
+                    <td>{val.email} </td>
                 </tr>
             );
         });
@@ -51,6 +52,7 @@ class AddressBook extends Component {
                             <th>City</th>
                             <th>State</th>
                             <th>Zip</th>
+                            <th>email</th>
                         </tr>
                     </thead>
                     <tbody>
