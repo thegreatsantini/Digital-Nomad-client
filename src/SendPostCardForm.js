@@ -11,17 +11,38 @@ import {
 } from 'react-bootstrap';
 import ContactTypeAhead from "./ContactTypeAhead";
 
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
+
 export default class SendContactForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedNames: []
+            selectedNames: [],
+            location: '',
         };
     }
 
 handleRecipientList = (e) => {
     console.log('clicked', e)
 };
+
+success = async (pos) => {
+    
+    const crd = pos.coords;
+    const userLocation = await Axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${crd.latitude},${crd.longitude}&sensor=true`);
+    const formatedLocation = userLocation.data.results[2].formatted_address;
+    this.setState({ location: formatedLocation }, ()=> console.log('state',this.state.location))
+};
+
+error = (err) => {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -38,8 +59,9 @@ handleRecipientList = (e) => {
         //     });
     };
 
+
     componentDidMount = () => {
-        console.log(this.props.userID)
+        navigator.geolocation.getCurrentPosition(this.success, this.error, options);
     }
 
     handleChange = (e) => {
@@ -47,7 +69,7 @@ handleRecipientList = (e) => {
             acc.push(next['value'])
             return acc
         }, [])
-        this.setState({ selectedNames: onlyNames }, ()=> console.log(this.state.selectedNames))
+        this.setState({ selectedNames: onlyNames })
     }
 
     render() {
@@ -96,17 +118,17 @@ handleRecipientList = (e) => {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="city">
-                        
-                        <Col sm={5}>
-                            <FormControl
-                                value={ this.state.city }
-                                onChange={this.handleChange}
-                                type="text"
-                                placeholder="Prince Edwards Kingdom"
+                    <FormGroup controlId="location">
+                    <Col sm={5}>
+                        <ControlLabel>Your Location</ControlLabel>
+                        <FormControl 
+                            componentClass="input" 
+                            placeholder="" 
+                            value={this.state.location === '' ? 'Locating...' : this.state.location}
                             />
                         </Col>
                     </FormGroup>
+
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
                             <Button type="submit">Add Address</Button>

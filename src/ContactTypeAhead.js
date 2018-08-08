@@ -2,21 +2,15 @@ import React, { Component } from 'react';
 import Axios from "axios";
 import { SERVER_URL } from './constants';
 import Select from 'react-select';
-// import { colourOptions } from '../data';
 
-const names = [1,2,4,5,6,7,9];
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-];
+
 export default class ContactTypeAhead extends Component {
     constructor(props) {
         super(props);
         this.state = {
             names : [],
-            selectedNames: []
+            selectedNames: [],
         };
     };
 
@@ -27,7 +21,7 @@ export default class ContactTypeAhead extends Component {
             myArray.push({value: item.name, label: item.name});
             return myArray
         }, [])
-        this.setState({ names: namesOnly }, () => console.log('here',this.state.names))
+        this.setState({ names: namesOnly })
     };
 
     componentDidMount = () => {
