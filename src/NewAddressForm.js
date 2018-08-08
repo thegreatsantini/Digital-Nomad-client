@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 import Axios from "axios";
 import { SERVER_URL } from './constants';
 import {
@@ -10,7 +10,7 @@ import {
     Col
 } from 'react-bootstrap';
 
-class NewAddressForm extends React.Component {
+class NewAddressForm extends Component {
     constructor(props) {
         super(props);
         this.state = {

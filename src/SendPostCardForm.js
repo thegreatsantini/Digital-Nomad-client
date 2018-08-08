@@ -9,95 +9,111 @@ import {
     FormControl,
     Col
 } from 'react-bootstrap';
-import {Typeahead} from 'react-bootstrap-typeahead';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
-// import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
+import ContactTypeAhead from "./ContactTypeAhead";
 
-export default class SendPostCardForm extends React.Component {
+export default class SendContactForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            names : [],
             selectedNames: []
         };
     }
 
-    getContactList = async () => {
-        const contactsArray = await Axios.get( `${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}`)
-        // this.setState( {names: contactsArray.data}, ()=>{console.log(this.state.names)} )
-        const namesOnly = contactsArray.data.reduce((myArray, item) => {
-            myArray.push(item.name);
-            return myArray
-        }, [])
-        this.setState({ names: namesOnly }, () => console.log(this.state.names))
-    };
-    componentDidMount = () => {
-        this.getContactList()
-    };
-
-    
+handleRecipientList = (e) => {
+    console.log('clicked', e)
+};
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.props.updateUser)
-        Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state)
-            .then(result => {
-                console.log('Success', result);
+        // console.log(this.props.updateUser)
+        // Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state)
+        //     .then(result => {
+        //         console.log('Success', result);
                 
-                localStorage.setItem('loginToken', result.data);
-                this.props.updateUser();
-            })
-            .catch(err => {
-                console.log('Error', err);
-            });
+        //         localStorage.setItem('loginToken', result.data);
+        //         this.props.updateUser();
+        //     })
+        //     .catch(err => {
+        //         console.log('Error', err);
+        //     });
     };
 
+    componentDidMount = () => {
+        console.log(this.props.userID)
+    }
+
+    handleChange = (e) => {
+        const onlyNames = e.reduce((acc, next) => {
+            acc.push(next['value'])
+            return acc
+        }, [])
+        this.setState({ selectedNames: onlyNames }, ()=> console.log(this.state.selectedNames))
+    }
+
     render() {
-        let {options} = this.state.names;
         return (
             <div>
-                <Typeahead
-                    multiple
-                    labelKey={'Search Address Book'}
-                    onChange={(selected) => { this.handleNameSelection(selected) }}
-                    options={this.state.names}
-                    placeholder={'Search Address Book'}
+                <ContactTypeAhead 
+                    handleRecipientList={this.handleRecipientList} 
+                    userID={this.props.userID}
+                    handleRecipientList={this.handleChange}
                     />
-                <Form onSubmit={this.handleSubmit} horizontal>
+                    <Form onSubmit={this.handleSubmit} horizontal>
                     <FormGroup controlId="name">
                         <Col componentClass={ControlLabel} sm={2}>
-                            Name
+                            Full Name
                         </Col>
                         <Col sm={5}>
                             <FormControl
                                 value={this.state.name}
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="Name"
+                                placeholder="Muffin Man"
                             />
                         </Col>
                     </FormGroup>
-
-                    <FormGroup controlId="state">
+                    <FormGroup controlId="street">
                         <Col componentClass={ControlLabel} sm={2}>
-                            State
+                            Street
                         </Col>
                         <Col sm={5}>
                             <FormControl
-                                value={this.state.state}
+                                value={ this.state.street } 
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="State"
+                                placeholder="Drury Lane"
                             />
                         </Col>
                     </FormGroup>
 
+                    <FormGroup controlId="message">
+                    <Col sm={5}>
+                        <ControlLabel>Message</ControlLabel>
+                        <FormControl 
+                            componentClass="textarea" 
+                            placeholder="Message" 
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="city">
+                        
+                        <Col sm={5}>
+                            <FormControl
+                                value={ this.state.city }
+                                onChange={this.handleChange}
+                                type="text"
+                                placeholder="Prince Edwards Kingdom"
+                            />
+                        </Col>
+                    </FormGroup>
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
                             <Button type="submit">Add Address</Button>
                         </Col>
                     </FormGroup>
-                </Form>
-            </div>)
+                    </Form>
+            </div>
+        )
     }
 }
