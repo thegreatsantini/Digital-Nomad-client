@@ -28,28 +28,6 @@ export default class ContactTypeAhead extends Component {
         this.getContactList()
     };
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        // Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state)
-        //     .then(result => {
-        //         console.log('Success', result);
-
-        //         localStorage.setItem('loginToken', result.data);
-        //         this.props.updateUser();
-        //     })
-        //     .catch(err => {
-        //         console.log('Error', err);
-        //     });
-    };
-
-    // handleChange = (e) => {
-    //     const onlyNames = e.reduce((acc, next) => {
-    //         acc.push(next['value'])
-    //         return acc
-    //     }, [])
-    //     this.setState({ selectedNames: onlyNames }, ()=> console.log(this.state.selectedNames))
-    // }
-
     render() {
         return (
             <div>
