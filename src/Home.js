@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs, Jumbotron } from 'react-bootstrap';
 import AddressBook from './AddressBook'
 import SendPostCardForm from './SendPostCardForm';
 
-class Home extends Component {
-    constructor(props, context) {
-        super(props, context);
+export default class Home extends Component {
+    constructor(props) {
+        super(props);
 
         this.handleSelect = this.handleSelect.bind(this);
 
@@ -13,9 +13,7 @@ class Home extends Component {
             key: 1
         };
     }
-    componentDidMount = () => {
-        // console.log( 'Home comp:', this.props.updateUser)
-    };
+    
     handleSelect(key) {
         this.setState({ key });
     };
@@ -23,6 +21,12 @@ class Home extends Component {
     render() {
         return (
             <div>
+                <Jumbotron>
+                    <h1>Hello, {this.props.name}</h1>
+                    <p>
+                        Send digital postcards to your friends and family
+                    </p>
+                </Jumbotron>;
                 <Tabs
                     activeKey={this.state.key}
                     onSelect={this.handleSelect}
@@ -41,6 +45,4 @@ class Home extends Component {
             </div>
         );
     }
-}
-
-export default Home;
+};
