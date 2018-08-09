@@ -1,6 +1,5 @@
 import React from "react";
 import Axios from "axios";
-import { SERVER_URL } from './constants';
 import {
     FormGroup,
     ControlLabel,
@@ -27,16 +26,12 @@ export default class SendContactForm extends React.Component {
         };
     }
 
-handleRecipientList = (e) => {
-    console.log('clicked', e)
-};
-
 success = async (pos) => {
     
     const crd = pos.coords;
     const userLocation = await Axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${crd.latitude},${crd.longitude}&sensor=true`);
     const formatedLocation = userLocation.data.results[2].formatted_address;
-    this.setState({ location: formatedLocation }, ()=> console.log('state',this.state.location))
+    this.setState({ location: formatedLocation })
 };
 
 error = (err) => {
@@ -64,7 +59,7 @@ error = (err) => {
         navigator.geolocation.getCurrentPosition(this.success, this.error, options);
     }
 
-    handleChange = (e) => {
+    handleRecipientList = (e) => {
         const onlyNames = e.reduce((acc, next) => {
             acc.push(next['value'])
             return acc
@@ -78,7 +73,6 @@ error = (err) => {
                 <ContactTypeAhead 
                     handleRecipientList={this.handleRecipientList} 
                     userID={this.props.userID}
-                    handleRecipientList={this.handleChange}
                     />
                     <Form onSubmit={this.handleSubmit} horizontal>
                     <FormGroup controlId="name">
