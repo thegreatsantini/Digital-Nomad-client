@@ -8,8 +8,8 @@ import SignUp from './auth/SignUp';
 import Home from './Home';
 import './App.css';
 import AddressBook from './AddressBook';
-import Profile from './Profile'
-
+import Profile from './Profile';
+import EditContact from './EditContact';
 
 export default class App extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ export default class App extends Component {
               <Navigation user={this.state.user} updateUser={this.getUser} />
               <Route path='/addressbook' component={() => (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id} />)} />
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
-
+              <Route path="/contacts/edit/" component={() => (<EditContact user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/profile" component={() => (<Profile currentUser={this.state.user} userID={this.state.id} updateUser={this.getUser} />)} />
               
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
