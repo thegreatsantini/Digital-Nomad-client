@@ -56,7 +56,7 @@ error = (err) => {
 
 
     componentDidMount = () => {
-        navigator.geolocation.getCurrentPosition(this.success, this.error, options);
+        navigator.geolocation.watchPosition(this.success, this.error, options);
     }
 
     handleRecipientList = (e) => {
