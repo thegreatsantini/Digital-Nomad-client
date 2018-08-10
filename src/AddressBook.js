@@ -5,7 +5,10 @@ import {
     Table,
     thead,
     tr,
+    Button,
+    Glyphicon
 } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 class AddressBook extends Component {
@@ -37,6 +40,18 @@ class AddressBook extends Component {
                     <td>{val.state} </td>
                     <td>{val.zipcode} </td>
                     <td>{val.email} </td>
+                    <Button bsSize="small">
+                        <Link 
+                            to={{
+                                pathname: `/contacts/edit/${val._id}`
+                            }}
+                            >
+                            <Glyphicon glyph="pencil" />
+                        </Link>
+                    </Button>    
+                    <Button bsSize="small">
+                        <Glyphicon glyph="trash" />
+                    </Button>
                 </tr>
             );
         });
