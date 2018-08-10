@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { SERVER_URL } from './constants';
+import { SERVER_URL } from '../constants';
 import { Form, FormControl, ControlLabel, Button, FormGroup } from 'react-bootstrap';
-import './testProfile.jpg'
+import '../testProfile.jpg'
 
 export default class EditProfileForm extends Component {
     constructor(props) {

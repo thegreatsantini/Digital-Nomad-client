@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, Jumbotron } from 'react-bootstrap';
 import AddressBook from './AddressBook'
-import SendPostCardForm from './SendPostCardForm';
+import SendPostCardForm from '../Forms/SendPostCardForm';
 
 export default class Home extends Component {
     constructor(props) {

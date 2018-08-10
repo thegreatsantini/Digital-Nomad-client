@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Axios from "axios";
-import { SERVER_URL } from './constants';
+import { SERVER_URL } from '../constants';
 
-export default class EditContact extends Component {
+export default class EditContactForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,7 +27,5 @@ export default class EditContact extends Component {
                 'contact'
             </div>
         );
-
     }
-
 };

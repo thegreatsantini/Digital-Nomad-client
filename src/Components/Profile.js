@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { SERVER_URL } from './constants';
+import { SERVER_URL } from '../constants';
 import { Col, Image, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
-import EditProfileForm from './EditProfileForm'
+import EditProfileForm from '../Forms/EditProfileForm'
 
 export default class Profile extends Component {
     constructor(props) {

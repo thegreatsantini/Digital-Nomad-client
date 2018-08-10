@@ -8,7 +8,7 @@ import {
     FormControl,
     Col
 } from 'react-bootstrap';
-import ContactTypeAhead from "./ContactTypeAhead";
+import ContactTypeAhead from "../Containers/ContactTypeAhead";
 
 var options = {
     enableHighAccuracy: true,
