@@ -64,7 +64,7 @@ error = (err) => {
             acc.push(next['value'])
             return acc
         }, [])
-        this.setState({ selectedNames: onlyNames })
+        this.setState({ selectedNames: onlyNames }, ()=> console.log(this.state.selectedNames))
     }
 
     render() {

@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { SERVER_URL } from '../constants';
 import { Col, Image, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import EditProfileForm from '../Forms/EditProfileForm'
-
+import testProfile from '../testProfile.jpg'
 export default class Profile extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +26,7 @@ export default class Profile extends Component {
         if ( !this.state.editUser ) {
         return (
             <div>
-                <Image src="./testProfile.jpg" rounded alt='avatar' />
+                <Image src={ testProfile } rounded alt='avatar' />
                 <ListGroup>
                     <ListGroupItem>Name: {user.name} </ListGroupItem>
                     <ListGroupItem>Email: {user.email} </ListGroupItem>
