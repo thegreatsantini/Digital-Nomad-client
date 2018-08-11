@@ -8,7 +8,7 @@ import {
     FormControl,
     Col
 } from 'react-bootstrap';
-import ContactTypeAhead from "./ContactTypeAhead";
+import ContactTypeAhead from "../Containers/ContactTypeAhead";
 
 var options = {
     enableHighAccuracy: true,
@@ -64,7 +64,7 @@ error = (err) => {
             acc.push(next['value'])
             return acc
         }, [])
-        this.setState({ selectedNames: onlyNames })
+        this.setState({ selectedNames: onlyNames }, ()=> console.log(this.state.selectedNames))
     }
 
     render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewAddressForm from './NewAddressForm'
+import NewAddressForm from '../Forms/NewAddressForm'
 import {
     th,
     Table,

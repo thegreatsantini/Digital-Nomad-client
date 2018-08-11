@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from "axios";
-import { SERVER_URL } from './constants';
+import { SERVER_URL } from '../constants';
 import Select from 'react-select';
 
 

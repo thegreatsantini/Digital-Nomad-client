@@ -5,11 +5,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navigation from './layout/Navigation'
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
-import Home from './Home';
+import Home from './Components/Home';
 import './App.css';
-import AddressBook from './AddressBook';
-import Profile from './Profile';
-import EditContact from './EditContact';
+import AddressBook from './Components/AddressBook';
+import Profile from './Components/Profile';
+import EditContactForm from './Forms/EditContactForm';
+import SandBox from './SandBox';
 
 export default class App extends Component {
   constructor(props) {
@@ -68,11 +69,13 @@ export default class App extends Component {
               <Navigation user={this.state.user} updateUser={this.getUser} />
               <Route path='/addressbook' component={() => (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id} />)} />
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
-              <Route path="/contacts/edit/" component={() => (<EditContact user={this.state.user} updateUser={this.getUser} />)} />
+              <Route path="/contacts/edit/" component={() => (<EditContactForm user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/profile" component={() => (<Profile currentUser={this.state.user} userID={this.state.id} updateUser={this.getUser} />)} />
               
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
               <Route exact path='/' component={() => (<Home _id={this.state.id} name={this.state.name} updateUser={this.getUser} savedContacts={this.state.savedContacts} />)} />
+
+              <Route path='/sandbox' component={() => (<SandBox userID={this.state.id} updateUser={this.getUser} />)} />
 
             </div>
           </div>
