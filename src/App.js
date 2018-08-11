@@ -10,6 +10,7 @@ import './App.css';
 import AddressBook from './Components/AddressBook';
 import Profile from './Components/Profile';
 import EditContactForm from './Forms/EditContactForm';
+import SandBox from './SandBox';
 
 export default class App extends Component {
   constructor(props) {
@@ -73,6 +74,8 @@ export default class App extends Component {
               
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
               <Route exact path='/' component={() => (<Home _id={this.state.id} name={this.state.name} updateUser={this.getUser} savedContacts={this.state.savedContacts} />)} />
+
+              <Route path='/sandbox' component={() => (<SandBox userID={this.state.id} updateUser={this.getUser} />)} />
 
             </div>
           </div>
