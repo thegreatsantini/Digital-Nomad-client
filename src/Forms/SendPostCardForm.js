@@ -9,6 +9,7 @@ import {
     Col
 } from 'react-bootstrap';
 import ContactTypeAhead from "../Containers/ContactTypeAhead";
+import { SERVER_URL } from "../constants";
 
 var options = {
     enableHighAccuracy: true,
@@ -21,13 +22,26 @@ export default class SendContactForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedNames: [],
+            recipients: [],
             location: '',
+            message: ''
         };
     }
 
+    postToDb = async (data) => {
+        console.log('sent')
+        const postReq = await Axios.post(`${SERVER_URL}/postcards/api/v1/${this.props.userID}/add/`,{
+            imgUrl: data,
+            recipients: this.state.recipients,
+            message: this.state.message,
+            userId: this.props.userID
+        })
+        console.log('result', postReq.data)
+        localStorage.setItem('loginToken', postReq.data);
+        this.props.updateUser();
+    }
+
 success = async (pos) => {
-    
     const crd = pos.coords;
     const userLocation = await Axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${crd.latitude},${crd.longitude}&sensor=true`);
     const formatedLocation = userLocation.data.results[2].formatted_address;
@@ -39,20 +53,6 @@ error = (err) => {
 }
 
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        // console.log(this.props.updateUser)
-        // Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state)
-        //     .then(result => {
-        //         console.log('Success', result);
-                
-        //         localStorage.setItem('loginToken', result.data);
-        //         this.props.updateUser();
-        //     })
-        //     .catch(err => {
-        //         console.log('Error', err);
-        //     });
-    };
 
 
     componentDidMount = () => {
@@ -64,31 +64,46 @@ error = (err) => {
             acc.push(next['value'])
             return acc
         }, [])
-        this.setState({ selectedNames: onlyNames }, ()=> console.log(this.state.selectedNames))
+        this.setState({ recipients: onlyNames })
     }
+
+    handleChange = event => {
+        console.log(event.target.id)
+        this.setState({
+        [event.target.id] : event.target.value,
+        });
+    };
+
+    uploadWidget = async (e) => {
+        e.preventDefault();
+        await window.cloudinary.openUploadWidget({ cloud_name: `${process.env.REACT_APP_CLOUD_NAME}`, upload_preset: 'phaqrdzz', tags:['testing']},
+            (error, result) => {
+                if (error) { console.log('Couldn\'t post to Cloudinary', error) }
+                else {
+                    this.postToDb(result[0].secure_url)
+                }
+            });
+        };
 
     render() {
         return (
             <div>
+                <Form onSubmit={this.uploadWidget} horizontal>
                 <ContactTypeAhead 
                     handleRecipientList={this.handleRecipientList} 
                     userID={this.props.userID}
                     />
-                    <Form onSubmit={this.handleSubmit} horizontal>
-                    <FormGroup controlId="name">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            Full Name
-                        </Col>
+                    <FormGroup controlId="message">
                         <Col sm={5}>
+                            <ControlLabel>Message</ControlLabel>
                             <FormControl
-                                value={this.state.name}
                                 onChange={this.handleChange}
-                                type="text"
-                                placeholder="Muffin Man"
-                            />
-                        </Col>
+                                componentClass="textarea" 
+                                placeholder="Message" 
+                                />
+                            </Col>
                     </FormGroup>
-                    <FormGroup controlId="street">
+                    {/* <FormGroup controlId="street">
                         <Col componentClass={ControlLabel} sm={2}>
                             Street
                         </Col>
@@ -100,17 +115,7 @@ error = (err) => {
                                 placeholder="Drury Lane"
                             />
                         </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="message">
-                    <Col sm={5}>
-                        <ControlLabel>Message</ControlLabel>
-                        <FormControl 
-                            componentClass="textarea" 
-                            placeholder="Message" 
-                            />
-                        </Col>
-                    </FormGroup>
+                    </FormGroup> */}
 
                     <FormGroup controlId="location">
                     <Col sm={5}>
