@@ -26,7 +26,7 @@ export default class Home extends Component {
                     <p>
                         Send digital postcards to your friends and family
                     </p>
-                </Jumbotron>;
+                </Jumbotron>
                 <Tabs
                     activeKey={this.state.key}
                     onSelect={this.handleSelect}

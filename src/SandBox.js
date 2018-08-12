@@ -9,7 +9,7 @@ import {
     Col
 } from 'react-bootstrap';
 import ContactTypeAhead from "./Containers/ContactTypeAhead";
-import { SERVER_URL } from "./constants";
+
 
 export default class SandBox extends React.Component {
     constructor(props) {
@@ -18,16 +18,6 @@ export default class SandBox extends React.Component {
             recipients: [],
             message: '',
         };
-    }
-
-    postToDb = async (data) => {
-        const postReq = await Axios.post(`${SERVER_URL}/postcards/api/v1/add/`,{
-            imgUrl: data,
-            recipients: this.state.recipients,
-            message: this.state.message,
-            userId: this.props.userID
-        })
-        console.log('result', postReq)
     }
 
     handleRecipientList = (e) => {
@@ -45,23 +35,7 @@ export default class SandBox extends React.Component {
         });
     };
 
-    uploadWidget = async (e) => {
-        e.preventDefault();
-        await window.cloudinary.openUploadWidget({ cloud_name: `${process.env.REACT_APP_CLOUD_NAME}`, upload_preset: 'phaqrdzz', tags:['testing']},
-            (error, result) => {
-                if (error) { console.log('Couldn\'t post to Cloudinary', error) }
-                else {
-                    console.log(result[0].secure_url)
-                    this.postToDb(result[0].secure_url)
-                }
-            });
-        };
-
-    componentDidMount = () => {
-        console.log(this.props.userID)
-        console.log(process.env.REACT_APP_NODE_ENV)
-    };
-
+    
 
     render() {
         return (
@@ -83,13 +57,6 @@ export default class SandBox extends React.Component {
                             </Col>
                     </FormGroup>
 
-                    {/* <Button
-                        type='submit'
-                        onClick={this.uploadWidget} 
-                        className="upload-button"
-                        > 
-                        upload image and Send post card
-                    </Button> */}
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
                             <Button type="submit">Send Card</Button>
