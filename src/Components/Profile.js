@@ -4,6 +4,7 @@ import { SERVER_URL } from '../constants';
 import { Col, Image, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import EditProfileForm from '../Forms/EditProfileForm'
 import testProfile from '../testProfile.jpg'
+import SentPostCards from '../Containers/SentPostCards';
 export default class Profile extends Component {
     constructor(props) {
         super(props);
@@ -16,8 +17,8 @@ export default class Profile extends Component {
     
 
     // componentWillReceiveProps should be used maybe??    
-    componentDidMount = () => {
-        console.log(this.props.userID)
+    componentDidMount = async () => {
+        
     };
             
     render() {
@@ -26,7 +27,7 @@ export default class Profile extends Component {
         if ( !this.state.editUser ) {
         return (
             <div>
-                <Image src={ testProfile } rounded alt='avatar' />
+                {/* <Image src={ testProfile } rounded alt='avatar' /> */}
                 <ListGroup>
                     <ListGroupItem>Name: {user.name} </ListGroupItem>
                     <ListGroupItem>Email: {user.email} </ListGroupItem>
@@ -36,8 +37,9 @@ export default class Profile extends Component {
                     bsStyle="info"
                     onClick={() => this.setState({ editUser: true })}
                     >
-                    Info
+                    Update Info
                 </Button>
+                <SentPostCards userID={this.props.userID} />
             </div>
             )
         } 
