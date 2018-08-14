@@ -15,18 +15,10 @@ class AddressBook extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newName: '',
-            newStreet: '',
-            newCity: '',
-            newState: '',
-            newZip: ''
+            
         };
     }
 
-    componentDidMount = () => {
-        // console.log('addressbook:', this.props.updateUser)
-        // console.log('addressbook:', this.props.thing)
-    }
 
     render() {
         let list = this.props.list || [];
@@ -41,14 +33,14 @@ class AddressBook extends Component {
                     <td>{val.zipcode} </td>
                     <td>{val.email} </td>
                     <Button bsSize="small">
-                        <Link 
+                        <Link
                             to={{
-                                pathname: `/contacts/edit/${val._id}`
+                              pathname: `/contacts/edit/${val._id}`
                             }}
                             >
                             <Glyphicon glyph="pencil" />
                         </Link>
-                    </Button>    
+                    </Button>
                     <Button bsSize="small">
                         <Glyphicon glyph="trash" />
                     </Button>
@@ -76,7 +68,7 @@ class AddressBook extends Component {
                 </Table>
                 <br />
                 <br />
-                <NewAddressForm userID={this.props.userID} updateUser={this.props.updateUser} />
+
             </div>
         );
 
