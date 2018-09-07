@@ -36,7 +36,7 @@ export default class App extends Component {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => {
-          // console.log("User ", response.data.user)
+          console.log("User ", response.data.user)
           this.setState({
             user: response.data.user,
             name: response.data.user.name,
