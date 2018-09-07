@@ -30,11 +30,15 @@ export default class SendContactForm extends React.Component {
 
     postToDb = async (data) => {
         console.log('sent')
+        console.log(this.props.userID)
+    let token = localStorage.getItem('loginToken');
         const postReq = await Axios.post(`${SERVER_URL}/postcards/api/v1/${this.props.userID}/add/`,{
             imgUrl: data,
             recipients: this.state.recipients,
             message: this.state.message,
             userId: this.props.userID
+        }, {
+            headers: { 'Authorization': `Bearer ${token}` }
         })
         console.log('result', postReq.data)
         localStorage.setItem('loginToken', postReq.data);
