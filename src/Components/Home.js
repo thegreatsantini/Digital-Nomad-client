@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Jumbotron } from 'react-bootstrap';
+import { Tab, Tabs, Jumbotron,code } from 'react-bootstrap';
 import AddressBook from './AddressBook'
 import SendPostCardForm from '../Forms/SendPostCardForm';
+import NewAddress from '../Forms/NewAddressForm'
+import NewAddressForm from '../Forms/NewAddressForm';
 
 export default class Home extends Component {
     constructor(props) {
@@ -12,6 +14,18 @@ export default class Home extends Component {
         this.state = {
             key: 1
         };
+    }
+    componentDidMount = () => {
+
+    }
+
+    renderUser = () => {
+        console.log(this.props)
+        return (
+            <code>
+                {this.props.name}
+            </code>
+        )
     }
     
     handleSelect(key) {
@@ -42,6 +56,8 @@ export default class Home extends Component {
                         Settings
                     </Tab>
                 </Tabs>
+                <NewAddressForm />
+                { this.props.name ? this.renderUser() : "############no user"}
             </div>
         );
     }

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
-import { SERVER_URL } from '../constants';
-import { Col, Image, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import EditProfileForm from '../Forms/EditProfileForm'
-import testProfile from '../testProfile.jpg'
 import SentPostCards from '../Containers/SentPostCards';
 export default class Profile extends Component {
     constructor(props) {

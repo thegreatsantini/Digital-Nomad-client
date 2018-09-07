@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
 // import '../nav.css';
 import { Navbar, NavItem, Nav } from 'react-bootstrap';
 
 
-class Navigation extends Component {
-    
 
-    handleLogout = (e) => {
+
+export default ({ user, updateUser }) =>  {
+    
+    
+    const handleLogout = (e) => {
         console.log('logging out...');
         e.preventDefault();
         localStorage.removeItem('loginToken');
-        this.props.updateUser();
+        updateUser();
+        // used to be this.updateUser()
     }
-
-    render() {
+    
         return (
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
@@ -25,17 +27,14 @@ class Navigation extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        <NavItem eventKey={1} onClick={this.handleLogout} >
-                            {this.props.user ? <a onClick={this.handleLogout}>Logout</a> : <Link to="/login">Login</Link>}
+                        <NavItem eventKey={1} onClick={handleLogout} >
+                            {user ? <a onClick={handleLogout}>Logout</a> : <Link to="/login">Login</Link>}
                         </NavItem>
                         <NavItem eventKey={2}>
-                            {this.props.user ? <Link to="/profile">Profile</Link> : <Link to="/signup">Sign up</Link>}
+                            {user ? <Link to="/profile">Profile</Link> : <Link to="/signup">Sign up</Link>}
                         </NavItem>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
     }
-}
-
-export default Navigation;
