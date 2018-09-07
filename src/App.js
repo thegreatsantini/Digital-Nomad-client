@@ -36,7 +36,7 @@ export default class App extends Component {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => {
-          // console.log("User ", response.data.user)
+          console.log("User ", response.data.user)
           this.setState({
             user: response.data.user,
             name: response.data.user.name,
@@ -69,13 +69,15 @@ export default class App extends Component {
               <Navigation user={this.state.user} updateUser={this.getUser} />
               <Route path='/addressbook' component={() => (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id} />)} />
               <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
-              <Route path="/contacts/edit/" component={() => (<EditContactForm user={this.state.user} updateUser={this.getUser} />)} />
+
+              <Route path="/contacts/edit/" component={() => (<EditContactForm id={this.state.id} user={this.state.user} updateUser={this.getUser} />)} />
               <Route path="/profile" component={() => (<Profile currentUser={this.state.user} userID={this.state.id} updateUser={this.getUser} />)} />
-              
+
               <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
               <Route exact path='/' component={() => (<Home _id={this.state.id} name={this.state.name} updateUser={this.getUser} savedContacts={this.state.savedContacts} />)} />
 
               <Route path='/sandbox' component={() => (<SandBox userID={this.state.id} updateUser={this.getUser} />)} />
+
 
             </div>
           </div>
