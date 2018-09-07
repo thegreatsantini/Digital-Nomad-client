@@ -23,6 +23,7 @@ class Login extends Component {
     handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
     handlePasswordChange = (e) => { this.setState({ password: e.target.value }); }
 
+
     handleSubmit = (e) => {
         e.preventDefault();
         axios.post(SERVER_URL + '/auth/login', this.state)
@@ -31,7 +32,9 @@ class Login extends Component {
                 // add newly-received token to localStorage
                 localStorage.setItem('loginToken', result.data.token);
                 // update user with a call to App.js
-                this.props.updateUser();
+                this.props.updateUser;
+                return (<Redirect to="/" />);
+                // this.props.history.push("/")
             })
             .catch(err => { console.log('Error', err); });
     }
