@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Jumbotron } from 'react-bootstrap';
+import { Tab, Tabs, Jumbotron,code } from 'react-bootstrap';
 import AddressBook from './AddressBook'
-import SendPostCardForm from '../Forms/SendPostCardForm';
+import SendPostCardForm from './SendPostCardForm';
+import NewAddressForm from './NewAddressForm';
 
 export default class Home extends Component {
     constructor(props) {
@@ -13,12 +14,21 @@ export default class Home extends Component {
             key: 1
         };
     }
-    
-    handleSelect(key) {
-        this.setState({ key });
-    };
+    renderLandingPage = () => {
+        return (
+            <div>
+                <Jumbotron>
+                    <h1>Welcome to Digital Nomad</h1>
+                    <p>
+                        Send digital postcards to your friends and family
+                    </p>
+                </Jumbotron>
+            </div>
+        )
+    }
 
-    render() {
+    renderUser = () => {
+        console.log('Home', this.props)
         return (
             <div>
                 <Jumbotron>
@@ -33,16 +43,40 @@ export default class Home extends Component {
                     id="controlled-tab-example"
                 >
                     <Tab eventKey={1} title="Address Book">
-                        <AddressBook list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser} />
+                        <AddressBook 
+                            list={this.props.savedContacts} 
+                            userID={this.props._id} 
+                            updateUser={this.props.updateUser} 
+                            />
                     </Tab>
                     <Tab eventKey={2} title="Send post card">
-                        <SendPostCardForm list={this.props.savedContacts} userID={this.props._id} updateUser={this.props.updateUser}/>
+                        <SendPostCardForm 
+                            list={this.props.savedContacts} 
+                            userID={this.props._id} 
+                            updateUser={this.props.updateUser}
+                            />
                     </Tab>
                     <Tab eventKey={3} title="Settings">
                         Settings
                     </Tab>
                 </Tabs>
+                <NewAddressForm id={this.props.id} updateUser={this.props.updateUser}/>
             </div>
+        )
+    }
+    
+    handleSelect(key) {
+        this.setState({ key });
+    };
+
+    render() {
+        return (
+            <React.Fragment>
+                { this.props.id 
+                ? this.renderUser() 
+                : this.renderLandingPage()
+                }
+            </React.Fragment>
         );
     }
 };

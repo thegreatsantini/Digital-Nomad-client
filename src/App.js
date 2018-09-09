@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { SERVER_URL } from './constants';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Navigation from './layout/Navigation'
-import Login from './auth/Login';
-import SignUp from './auth/SignUp';
-import Home from './Components/Home';
+import Navigation from './Components/Navigation'
+import Routes from "./Routes";
+
+
 import './App.css';
-import AddressBook from './Components/AddressBook';
-import Profile from './Components/Profile';
-import EditContactForm from './Forms/EditContactForm';
-import SandBox from './SandBox';
+
+
 
 export default class App extends Component {
   constructor(props) {
@@ -19,7 +16,8 @@ export default class App extends Component {
       user: null,
       name: null,
       id: null,
-      savedContacts: []
+      savedContacts: [],
+      email: ''
     }
   }
 
@@ -41,7 +39,8 @@ export default class App extends Component {
             user: response.data.user,
             name: response.data.user.name,
             id: response.data.user._id,
-            savedContacts: response.data.user.contacts
+            savedContacts: response.data.user.contacts,
+            email: response.data.user.email
           });
         })
         .catch(err => {
@@ -60,28 +59,28 @@ export default class App extends Component {
       })
     }
   }
+
+  handleLogout = (e) => {
+    console.log('logging out...');
+    e.preventDefault();
+    localStorage.removeItem('loginToken');
+    this.props.updateUser();
+}
+
   render() {
+    const childProps = {
+      // user: this.state.user,
+      name: this.state.name,
+      id: this.state.id,
+      savedContacts: this.state.savedContacts,
+      updateUser: this.getUser,
+      email: this.state.email,
+      // thing : 'This is from App.js'
+    };
     return (
       <div className="App">
-        <Router>
-          <div>
-            <div >
               <Navigation user={this.state.user} updateUser={this.getUser} />
-              <Route path='/addressbook' component={() => (<AddressBook savedContacts={this.state.savedContacts} updateUser={this.getUser} userID={this.state.id} />)} />
-              <Route path="/login" component={() => (<Login user={this.state.user} updateUser={this.getUser} />)} />
-
-              <Route path="/contacts/edit/" component={() => (<EditContactForm id={this.state.id} user={this.state.user} updateUser={this.getUser} />)} />
-              <Route path="/profile" component={() => (<Profile currentUser={this.state.user} userID={this.state.id} updateUser={this.getUser} />)} />
-
-              <Route path="/signup" component={() => (<SignUp user={this.state.user} updateUser={this.getUser} />)} />
-              <Route exact path='/' component={() => (<Home _id={this.state.id} name={this.state.name} updateUser={this.getUser} savedContacts={this.state.savedContacts} />)} />
-
-              <Route path='/sandbox' component={() => (<SandBox userID={this.state.id} updateUser={this.getUser} />)} />
-
-
-            </div>
-          </div>
-        </Router>
+              <Routes childProps={childProps} />
       </div>
     );
   }

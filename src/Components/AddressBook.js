@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NewAddressForm from '../Forms/NewAddressForm'
 import {
     th,
     Table,
@@ -12,12 +11,7 @@ import { Link } from 'react-router-dom';
 
 
 class AddressBook extends Component {
-    constructor(props) {
-        super(props);
-        // this.state = {
-            
-        // };
-    }
+
 
 
     render() {
@@ -35,9 +29,9 @@ class AddressBook extends Component {
                     <Button bsSize="small">
                         <Link
                             to={{
-                              pathname: `/contacts/edit/${val._id}`
+                                pathname: `/contacts/edit/${val._id}`
                             }}
-                            >
+                        >
                             <Glyphicon glyph="pencil" />
                         </Link>
                     </Button>

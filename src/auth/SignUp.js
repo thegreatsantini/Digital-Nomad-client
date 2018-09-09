@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import { SERVER_URL } from '../constants';
 
-class AmbassadorRegistration extends Component {
+export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,12 +58,12 @@ class AmbassadorRegistration extends Component {
                             Name
                         </Col>
                         <Col sm={5}>
-                            <FormControl 
-                                type="Name" 
+                            <FormControl
+                                type="Name"
                                 placeholder="Name"
-                                value={this.state.name} 
-                                onChange={this.handleNameChange}  
-                                />
+                                value={this.state.name}
+                                onChange={this.handleNameChange}
+                            />
                         </Col>
                     </FormGroup>
 
@@ -72,12 +72,12 @@ class AmbassadorRegistration extends Component {
                             Email
                         </Col>
                         <Col sm={5}>
-                            <FormControl 
-                                type="email" 
+                            <FormControl
+                                type="email"
                                 placeholder="Email"
-                                value={this.state.email} 
-                                onChange={this.handleEmailChange} 
-                                />
+                                value={this.state.email}
+                                onChange={this.handleEmailChange}
+                            />
                         </Col>
                     </FormGroup>
 
@@ -86,12 +86,12 @@ class AmbassadorRegistration extends Component {
                             Password
                         </Col>
                         <Col sm={5}>
-                            <FormControl 
-                                type="password" 
+                            <FormControl
+                                type="password"
                                 placeholder="Password"
-                                value={this.state.password} 
-                                onChange={this.handlePasswordChange} 
-                                />
+                                value={this.state.password}
+                                onChange={this.handlePasswordChange}
+                            />
                         </Col>
                     </FormGroup>
 
@@ -105,5 +105,3 @@ class AmbassadorRegistration extends Component {
         )
     }
 }
-
-export default AmbassadorRegistration;

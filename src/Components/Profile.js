@@ -1,58 +1,53 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
-import { SERVER_URL } from '../constants';
-import { Col, Image, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
-import EditProfileForm from '../Forms/EditProfileForm'
-import testProfile from '../testProfile.jpg'
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import EditProfileForm from './EditProfileForm'
 import SentPostCards from '../Containers/SentPostCards';
 export default class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editUser : false,
-            
+            editUser: false,
+
         };
     }
 
-    
 
-    // componentWillReceiveProps should be used maybe??    
-    componentDidMount = async () => {
-        
-    };
-            
-    render() {
-        const user = this.props.currentUser || '';
-
-        if ( !this.state.editUser ) {
+    renderProfilePage = () => {
+        console.log(this.props)
         return (
-            <div>
+            <React.Fragment>
                 {/* <Image src={ testProfile } rounded alt='avatar' /> */}
-                <ListGroup>
-                    <ListGroupItem>Name: {user.name} </ListGroupItem>
-                    <ListGroupItem>Email: {user.email} </ListGroupItem>
+                < ListGroup >
+                    <ListGroupItem>Name: {this.props.name} </ListGroupItem>
+                    <ListGroupItem>Email: {this.props.email} </ListGroupItem>
                     <ListGroupItem> 'other stuff' </ListGroupItem>
-                </ListGroup>
-                <Button 
+                </ListGroup >
+                <Button
                     bsStyle="info"
                     onClick={() => this.setState({ editUser: true })}
-                    >
+                >
                     Update Info
                 </Button>
                 <SentPostCards userID={this.props.userID} />
-            </div>
-            )
-        } 
-        else {
-            return (
-            <div>
-                <EditProfileForm 
+            </React.Fragment>
+        );
+    }
+
+
+    render() {
+        return (
+            <React.Fragment>
+                {this.props.id
+                    ? this.renderProfilePage()
+                    : this.renderLoading()
+                }
+            </React.Fragment>
+        )
+    }
+}
+
+{/* <EditProfileForm 
                     changeProfileInfo={this.changeProfileInfo} 
                     user={this.props.currentUser} 
                     handleChange={this.handleChange} 
-                    />
-            </div>
-            )
-        }
-    }
-}
+                    /> */}

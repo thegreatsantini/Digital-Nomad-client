@@ -26,16 +26,22 @@ class NewAddressForm extends Component {
 
     handleChange = event => {
         this.setState({
-        [event.target.id] : event.target.value,
+            [event.target.id]: event.target.value,
         });
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
-        Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state)
+        let token = localStorage.getItem('loginToken');
+        console.log(this.props.id)
+        Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.id}/`, this.state, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(result => {
                 console.log('Success', result);
-                
+
                 localStorage.setItem('loginToken', result.data);
                 this.props.updateUser();
             })
@@ -67,7 +73,7 @@ class NewAddressForm extends Component {
                         </Col>
                         <Col sm={5}>
                             <FormControl
-                                value={ this.state.street } 
+                                value={this.state.street}
                                 onChange={this.handleChange}
                                 type="text"
                                 placeholder="Drury Lane"
@@ -81,7 +87,7 @@ class NewAddressForm extends Component {
                         </Col>
                         <Col sm={5}>
                             <FormControl
-                                value={ this.state.city }
+                                value={this.state.city}
                                 onChange={this.handleChange}
                                 type="text"
                                 placeholder="Prince Edwards Kingdom"

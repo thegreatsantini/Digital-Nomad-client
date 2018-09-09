@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { SERVER_URL } from '../constants';
 import PostCardsThumbnails from './PostCardsThumbnails';
-import { Col, Image, Row, Thumbnail, Button, Grid } from 'react-bootstrap';
+import { Row,  Grid } from 'react-bootstrap';
 
 export default class SentPostCards extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ export default class SentPostCards extends Component {
   }
 
   renderCards = async (data) => {
-    console.log('thing', data[0])
     return (
       data[0].imgUrl
     )
@@ -31,8 +30,6 @@ export default class SentPostCards extends Component {
   };
 
   render() {
-    const thing = this.state.cards || ''
-    const user = this.props.currentUser || '';
     return (
       <div>
         <Grid>

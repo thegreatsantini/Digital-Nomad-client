@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Image, Row, Thumbnail, Button, Grid } from 'react-bootstrap';
+import { Col, Row, Thumbnail, Grid } from 'react-bootstrap';
 import Modal from './Modal';
 
 export default class SentPostCards extends Component {
