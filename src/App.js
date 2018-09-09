@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { SERVER_URL } from './constants';
-import Navigation from './layout/Navigation'
+import Navigation from './Components/Navigation'
 import Routes from "./Routes";
 
 
@@ -16,7 +16,8 @@ export default class App extends Component {
       user: null,
       name: null,
       id: null,
-      savedContacts: []
+      savedContacts: [],
+      email: ''
     }
   }
 
@@ -33,12 +34,13 @@ export default class App extends Component {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => {
-          // console.log("User ", response.data.user)
+          console.log("User ", response.data.user)
           this.setState({
             user: response.data.user,
             name: response.data.user.name,
             id: response.data.user._id,
-            savedContacts: response.data.user.contacts
+            savedContacts: response.data.user.contacts,
+            email: response.data.user.email
           });
         })
         .catch(err => {
@@ -67,11 +69,13 @@ export default class App extends Component {
 
   render() {
     const childProps = {
-      user: this.state.user,
+      // user: this.state.user,
       name: this.state.name,
-      id: this.state._id,
+      id: this.state.id,
       savedContacts: this.state.savedContacts,
-      updateUser: this.getUser
+      updateUser: this.getUser,
+      email: this.state.email,
+      // thing : 'This is from App.js'
     };
     return (
       <div className="App">

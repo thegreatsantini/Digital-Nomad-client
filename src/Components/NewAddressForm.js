@@ -32,10 +32,12 @@ class NewAddressForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-    let token = localStorage.getItem('loginToken');
-        console.log(this.props.userID)
-        Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userID}/`, this.state, {
-            headers: { 'Authorization': `Bearer ${token}` }
+        let token = localStorage.getItem('loginToken');
+        console.log(this.props.id)
+        Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.id}/`, this.state, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
             .then(result => {
                 console.log('Success', result);

@@ -29,9 +29,9 @@ class AddressBook extends Component {
                     <Button bsSize="small">
                         <Link
                             to={{
-                              pathname: `/contacts/edit/${val._id}`
+                                pathname: `/contacts/edit/${val._id}`
                             }}
-                            >
+                        >
                             <Glyphicon glyph="pencil" />
                         </Link>
                     </Button>
