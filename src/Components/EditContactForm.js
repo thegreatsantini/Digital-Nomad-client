@@ -9,6 +9,7 @@ import {
     FormControl,
     Col
 } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 export default class EditContactForm extends Component {
     constructor(props) {
@@ -24,16 +25,20 @@ export default class EditContactForm extends Component {
     }
 
     getUserData = async () => {
-        const getCurrentContact = await Axios.get(`http://localhost:8080/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`);
+        let token = localStorage.getItem('loginToken');
+        const getCurrentContact = await Axios.get(`http://localhost:8080/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
+            {
+                'headers': { 'Authorization': `Bearer ${token}` }
+            });
         const contactInfo = getCurrentContact.data;
-
         this.setState({
             name: contactInfo.name,
             street: contactInfo.street,
             city: contactInfo.city,
             state: contactInfo.state,
             zipcode: contactInfo.zipcode,
-            email: contactInfo.email
+            email: contactInfo.email,
+            userId: contactInfo.userId
         })
     }
 
@@ -47,12 +52,16 @@ export default class EditContactForm extends Component {
         });
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state.newName)
-        const updateContact = Axios.put(` ${SERVER_URL}/addressbook/api/v1/contacts/update/${window.location.href.split('/')[5]}`, this.state);
+        let token = localStorage.getItem('loginToken');
+        const updateContact = await Axios.put(` ${SERVER_URL}/addressbook/api/v1/contacts/update/${this.state.userId}`, this.state,
+            {
+                'headers': { 'Authorization': `Bearer ${token}` }
+            });
         console.log(updateContact.data)
-        // this.props.updateUser()
+        this.props.updateUser
+        window.location = `${window.location.origin}/`;
     }
 
     render() {
@@ -63,18 +72,18 @@ export default class EditContactForm extends Component {
                         <Col componentClass={ControlLabel} sm={2}>
                             Full Name
                         </Col>
-                            <Col sm={5}>
-                                <FormControl
-                                    value={this.state.name}
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    placeholder="Muffin Man"
-                                />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup controlId="street">
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Street
+                        <Col sm={5}>
+                            <FormControl
+                                value={this.state.name}
+                                onChange={this.handleChange}
+                                type="text"
+                                placeholder="Muffin Man"
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup controlId="street">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Street
                         </Col>
                         <Col sm={5}>
                             <FormControl
@@ -90,19 +99,19 @@ export default class EditContactForm extends Component {
                         <Col componentClass={ControlLabel} sm={2}>
                             City
                         </Col>
-                            <Col sm={5}>
-                                <FormControl
-                                    value={this.state.city}
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    placeholder="Prince Edwards Kingdom"
-                                />
-                            </Col>
-                        </FormGroup>
+                        <Col sm={5}>
+                            <FormControl
+                                value={this.state.city}
+                                onChange={this.handleChange}
+                                type="text"
+                                placeholder="Prince Edwards Kingdom"
+                            />
+                        </Col>
+                    </FormGroup>
 
-                        <FormGroup controlId="state">
-                            <Col componentClass={ControlLabel} sm={2}>
-                                State
+                    <FormGroup controlId="state">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            State
                         </Col>
                         <Col sm={5}>
                             <FormControl
@@ -118,19 +127,19 @@ export default class EditContactForm extends Component {
                         <Col componentClass={ControlLabel} sm={2}>
                             ZipCode
                         </Col>
-                            <Col sm={5}>
-                                <FormControl
-                                    value={this.state.zipcode}
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    placeholder="98028"
-                                />
-                            </Col>
-                        </FormGroup>
+                        <Col sm={5}>
+                            <FormControl
+                                value={this.state.zipcode}
+                                onChange={this.handleChange}
+                                type="text"
+                                placeholder="98028"
+                            />
+                        </Col>
+                    </FormGroup>
 
-                        <FormGroup controlId="email">
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Email
+                    <FormGroup controlId="email">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Email
                         </Col>
                         <Col sm={5}>
                             <FormControl
