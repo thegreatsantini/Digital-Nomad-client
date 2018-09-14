@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Jumbotron,code } from 'react-bootstrap';
+import { Tab, Tabs, Jumbotron } from 'react-bootstrap';
 import AddressBook from './AddressBook'
 import SendPostCardForm from './SendPostCardForm';
 import NewAddressForm from './NewAddressForm';
@@ -28,7 +28,7 @@ export default class Home extends Component {
     }
 
     renderUser = () => {
-        console.log('Home', this.props)
+        // console.log('Home', this.props)
         return (
             <div>
                 <Jumbotron>
@@ -43,28 +43,33 @@ export default class Home extends Component {
                     id="controlled-tab-example"
                 >
                     <Tab eventKey={1} title="Address Book">
-                        <AddressBook 
-                            list={this.props.savedContacts} 
-                            userID={this.props._id} 
-                            updateUser={this.props.updateUser} 
-                            />
-                    </Tab>
-                    <Tab eventKey={2} title="Send post card">
-                        <SendPostCardForm 
-                            list={this.props.savedContacts} 
-                            userID={this.props._id} 
+                        <AddressBook
+                            list={this.props.savedContacts}
+                            userId={this.props.id}
                             updateUser={this.props.updateUser}
-                            />
+                        />
+
+                        <NewAddressForm
+                            id={this.props.id}
+                            updateUser={this.props.updateUser}
+                        />
+
+                    </Tab>
+                    <Tab onClick={this.turnOnLocator} eventKey={2} title="Send post card">
+                        <SendPostCardForm
+                            list={this.props.savedContacts}
+                            userId={this.props.id}
+                            updateUser={this.props.updateUser}
+                        />
                     </Tab>
                     <Tab eventKey={3} title="Settings">
                         Settings
                     </Tab>
                 </Tabs>
-                <NewAddressForm id={this.props.id} updateUser={this.props.updateUser}/>
             </div>
         )
     }
-    
+
     handleSelect(key) {
         this.setState({ key });
     };
@@ -72,9 +77,9 @@ export default class Home extends Component {
     render() {
         return (
             <React.Fragment>
-                { this.props.id 
-                ? this.renderUser() 
-                : this.renderLandingPage()
+                {this.props.id
+                    ? this.renderUser()
+                    : this.renderLandingPage()
                 }
             </React.Fragment>
         );

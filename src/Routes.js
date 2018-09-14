@@ -20,9 +20,7 @@ export default ({ childProps }) =>
         <AppliedRoute path="/login" component={Login} props={childProps} />
         <AppliedRoute path="/signup" component={SignUp} props={childProps} />
         
-        <AppliedRoute path="/contacts/edit/" component={() => (<EditContactForm id={this.state.id} user={this.state.user} updateUser={this.getUser} />)} />
-
-
+        <AppliedRoute path="/contacts/edit/" component={EditContactForm} props={childProps} />
         <AppliedRoute path='/sandbox' component={() => (<SandBox userID={this.state.id} updateUser={this.getUser} />)} />
         { /* Finally, catch all unmatched AppliedRoutes */}
         <Route component={NotFound} />

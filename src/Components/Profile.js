@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
-import EditProfileForm from './EditProfileForm'
 import SentPostCards from '../Containers/SentPostCards';
 export default class Profile extends Component {
     constructor(props) {
@@ -11,9 +10,12 @@ export default class Profile extends Component {
         };
     }
 
+    componentDidMount = () => {
+        console.log(this.props.id)
+    }
+
 
     renderProfilePage = () => {
-        console.log(this.props)
         return (
             <React.Fragment>
                 {/* <Image src={ testProfile } rounded alt='avatar' /> */}
@@ -28,9 +30,19 @@ export default class Profile extends Component {
                 >
                     Update Info
                 </Button>
-                <SentPostCards userID={this.props.userID} />
+                <SentPostCards 
+                    userId={this.props.id} 
+                />
             </React.Fragment>
         );
+    }
+
+    renderLoading = () => {
+        return (
+            <React.Fragment>
+                <h3>Loading...</h3>
+            </React.Fragment>
+        )
     }
 
 
