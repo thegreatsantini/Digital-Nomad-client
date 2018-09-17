@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Modal, Glyphicon, FormControl, FormGroup,Col, ControlLabel } from 'react-bootstrap';
+import { Button, Modal, Glyphicon, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
-const form__style = {
-    marginBottom: '10px'
-}
+// const form__style = {
+//     marginBottom: '10px'
+// }
 
 export default class LocationModal extends Component {
     constructor(props, context) {
@@ -34,7 +34,7 @@ export default class LocationModal extends Component {
                     {...this.props}
                     show={this.state.show}
                     onHide={this.handleHide}
-                    dialogClassName="custom-modal"
+                    dialogClassName="location-modal"
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-lg">

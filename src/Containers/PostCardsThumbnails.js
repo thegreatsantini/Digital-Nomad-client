@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Col, Row, Thumbnail, Grid } from 'react-bootstrap';
 import ThumbnailModal from './ThumbnailModal';
 

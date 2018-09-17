@@ -9,7 +9,6 @@ import {
     Col
 } from 'react-bootstrap';
 import axios from 'axios';
-import { SERVER_URL } from '../constants';
 
 class Login extends Component {
     constructor(props) {
@@ -26,13 +25,13 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(SERVER_URL + '/auth/login', this.state)
+        axios.post(process.env.REACT_APP_DEV_SERVER + '/auth/login', this.state)
             .then(result => {
                 console.log('Success', result.data);
                 // add newly-received token to localStorage
                 localStorage.setItem('loginToken', result.data.token);
                 // update user with a call to App.js
-                this.props.updateUser;
+                this.props.updateUser();
                 return (<Redirect to="/" />);
                 // this.props.history.push("/")
             })

@@ -10,7 +10,6 @@ import {
     Glyphicon
 } from 'react-bootstrap';
 import ContactTypeAhead from "../Containers/ContactTypeAhead";
-import { SERVER_URL } from "../constants";
 import LocationModal from '../Containers/LocationModal';
 
 var options = {
@@ -43,7 +42,7 @@ export default class SendContactForm extends React.Component {
         console.log('sent')
         console.log(this.props.userID)
         let token = localStorage.getItem('loginToken');
-        const postReq = await Axios.post(`${SERVER_URL}/postcards/api/v1/${this.props.userId}/add/`, {
+        const postReq = await Axios.post(`${process.env.REACT_APP_DEV_SERVER}/postcards/api/v1/${this.props.userId}/add/`, {
             imgUrl: data,
             recipients: this.state.recipients,
             message: this.state.message,
