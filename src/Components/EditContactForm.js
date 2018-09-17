@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from "axios";
-import { SERVER_URL } from '../constants';
+
 import {
     FormGroup,
     ControlLabel,
@@ -9,7 +9,7 @@ import {
     FormControl,
     Col
 } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 export default class EditContactForm extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export default class EditContactForm extends Component {
 
     getUserData = async () => {
         let token = localStorage.getItem('loginToken');
-        const getCurrentContact = await Axios.get(`http://localhost:8080/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
+        const getCurrentContact = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
             {
                 'headers': { 'Authorization': `Bearer ${token}` }
             });
@@ -55,12 +55,12 @@ export default class EditContactForm extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         let token = localStorage.getItem('loginToken');
-        const updateContact = await Axios.put(` ${SERVER_URL}/addressbook/api/v1/contacts/update/${this.state.userId}`, this.state,
+        const updateContact = await Axios.put(` ${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/update/${this.state.userId}`, this.state,
             {
                 'headers': { 'Authorization': `Bearer ${token}` }
             });
         console.log(updateContact.data)
-        this.props.updateUser
+        this.props.updateUser()
         window.location = `${window.location.origin}/`;
     }
 

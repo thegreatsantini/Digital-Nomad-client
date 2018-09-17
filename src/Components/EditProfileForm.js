@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { SERVER_URL } from '../constants';
 import { Form, FormControl, ControlLabel, Button, FormGroup } from 'react-bootstrap';
 import '../testProfile.jpg'
 
@@ -16,7 +15,7 @@ export default class EditProfileForm extends Component {
     changeProfileInfo = async (e) => {
         e.preventDefault();
 
-        const newInfo = await Axios.put(`${SERVER_URL}/profile/api/v1/user/${this.props.userID}/edit/${this.state.newEmail}${this.state.newName}`)
+        const newInfo = await Axios.put(`${process.env.REACT_APP_DEV_SERVER}/profile/api/v1/user/${this.props.userID}/edit/${this.state.newEmail}${this.state.newName}`)
         console.log(newInfo)
         this.props.updateUser()
     }

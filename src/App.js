@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { SERVER_URL } from './constants';
 import Navigation from './Components/Navigation'
 import Routes from "./Routes";
 
@@ -22,6 +21,7 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
+    console.log(process.env.REACT_APP_DEV_SERVER)
     this.getUser();
   }
 
@@ -30,7 +30,7 @@ export default class App extends Component {
     let token = localStorage.getItem('loginToken');
     if (token) {
       // there is a token in localStorage; validate it
-      axios.post(SERVER_URL + '/auth/me/from/token', {
+      axios.post(process.env.REACT_APP_DEV_SERVER + '/auth/me/from/token', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => {

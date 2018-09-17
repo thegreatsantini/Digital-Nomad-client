@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Axios from "axios";
-import { SERVER_URL } from '../constants';
 import Select from 'react-select';
 
 
@@ -16,7 +15,7 @@ export default class ContactTypeAhead extends Component {
 
     getContactList = async () => {
         let token = localStorage.getItem('loginToken');
-        const contactsArray = await Axios.get(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.userId}`,
+        const contactsArray = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.userId}`,
             {
                 'headers': { 'Authorization': `Bearer ${token}` }
             })

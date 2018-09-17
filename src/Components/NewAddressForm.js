@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Axios from "axios";
-import { SERVER_URL } from '../constants';
 import {
     FormGroup,
     ControlLabel,
@@ -25,6 +24,8 @@ class NewAddressForm extends Component {
 
 
     handleChange = event => {
+        console.log('no brackets', event.target.id)
+        console.log('with brackets', [event.target.id])
         this.setState({
             [event.target.id]: event.target.value,
         });
@@ -34,7 +35,7 @@ class NewAddressForm extends Component {
         e.preventDefault();
         let token = localStorage.getItem('loginToken');
         console.log(this.props.id)
-        Axios.post(`${SERVER_URL}/addressbook/api/v1/contacts/${this.props.id}/`, this.state, {
+        Axios.post(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.id}/`, this.state, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

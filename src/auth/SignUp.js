@@ -9,7 +9,6 @@ import {
     Col
 } from 'react-bootstrap';
 import axios from 'axios';
-import { SERVER_URL } from '../constants';
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -32,7 +31,7 @@ export default class SignUp extends Component {
         e.preventDefault();
         console.log('Form submitted');
 
-        axios.post(SERVER_URL + '/auth/signup', this.state)
+        axios.post(process.env.REACT_APP_DEV_SERVER + '/auth/signup', this.state)
             .then(result => {
                 console.log('Successfully added user to db');
                 // add newly-received token to localStorage

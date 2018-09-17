@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import SentPostCards from '../Containers/SentPostCards';
+
 export default class Profile extends Component {
     constructor(props) {
         super(props);
@@ -9,11 +10,6 @@ export default class Profile extends Component {
 
         };
     }
-
-    componentDidMount = () => {
-        console.log(this.props.id)
-    }
-
 
     renderProfilePage = () => {
         return (
@@ -49,7 +45,8 @@ export default class Profile extends Component {
     render() {
         return (
             <React.Fragment>
-                {this.props.id
+                {
+                    this.props.id
                     ? this.renderProfilePage()
                     : this.renderLoading()
                 }
@@ -57,9 +54,3 @@ export default class Profile extends Component {
         )
     }
 }
-
-{/* <EditProfileForm 
-                    changeProfileInfo={this.changeProfileInfo} 
-                    user={this.props.currentUser} 
-                    handleChange={this.handleChange} 
-                    /> */}
