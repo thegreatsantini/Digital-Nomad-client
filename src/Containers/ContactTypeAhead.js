@@ -14,6 +14,7 @@ export default class ContactTypeAhead extends Component {
     };
 
     getContactList = async () => {
+        console.log('ran', this.props.userId)
         let token = localStorage.getItem('loginToken');
         const contactsArray = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.userId}`,
             {
@@ -27,7 +28,6 @@ export default class ContactTypeAhead extends Component {
     };
 
     componentDidMount = () => {
-        console.log(this.props)
         this.getContactList()
     };
 

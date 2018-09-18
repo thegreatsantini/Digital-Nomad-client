@@ -102,6 +102,7 @@ export default class SendContactForm extends React.Component {
     };
 
     render() {
+        this
         return (
             <div>
                 <Form onSubmit={this.uploadWidget} horizontal>

@@ -24,8 +24,6 @@ class NewAddressForm extends Component {
 
 
     handleChange = event => {
-        console.log('no brackets', event.target.id)
-        console.log('with brackets', [event.target.id])
         this.setState({
             [event.target.id]: event.target.value,
         });
@@ -34,7 +32,6 @@ class NewAddressForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let token = localStorage.getItem('loginToken');
-        console.log(this.props.id)
         Axios.post(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.id}/`, this.state, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -42,7 +39,6 @@ class NewAddressForm extends Component {
         })
             .then(result => {
                 console.log('Success', result);
-
                 localStorage.setItem('loginToken', result.data);
                 this.props.updateUser();
             })

@@ -28,7 +28,6 @@ export default class Home extends Component {
     }
 
     renderUser = () => {
-        
         return (
             <div>
                 <Jumbotron>
@@ -75,7 +74,6 @@ export default class Home extends Component {
     };
 
     render() {
-        console.log('Home', this.props.id)
         return (
             <React.Fragment>
                 {this.props.id
