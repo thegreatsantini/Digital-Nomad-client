@@ -81,7 +81,7 @@ export default class App extends Component {
     };
     return (
       <div className="App">
-              <Navigation user={this.state.user} updateUser={this.getUser} />
+              <Navigation user={this.state.id} updateUser={this.getUser} />
               <Routes childProps={childProps} />
       </div>
     );

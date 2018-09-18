@@ -35,7 +35,7 @@ export default class SendContactForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.userId)
+        // console.log(this.props.userId)
     }
 
     postToDb = async (data) => {
