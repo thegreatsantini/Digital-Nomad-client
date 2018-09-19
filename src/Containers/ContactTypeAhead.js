@@ -14,14 +14,13 @@ export default class ContactTypeAhead extends Component {
     };
 
     getContactList = async () => {
-        console.log('ran', this.props.userId)
         let token = localStorage.getItem('loginToken');
         const contactsArray = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.userId}`,
             {
                 'headers': { 'Authorization': `Bearer ${token}` }
             })
         const namesOnly = contactsArray.data.reduce((myArray, item) => {
-            myArray.push({ value: item.name, label: item.name });
+            myArray.push({ value: item.email, label: item.name });
             return myArray
         }, [])
         this.setState({ names: namesOnly })
