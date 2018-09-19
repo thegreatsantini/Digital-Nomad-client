@@ -39,8 +39,6 @@ export default class SendContactForm extends React.Component {
     }
 
     postToDb = async (data) => {
-        console.log('sent')
-        console.log(this.props.userID)
         let token = localStorage.getItem('loginToken');
         const postReq = await Axios.post(`${process.env.REACT_APP_DEV_SERVER}/postcards/api/v1/${this.props.userId}/add/`, {
             imgUrl: data,
@@ -84,7 +82,6 @@ export default class SendContactForm extends React.Component {
     }
 
     handleChange = event => {
-        console.log(event.target.id)
         this.setState({
             [event.target.id]: event.target.value,
         });
