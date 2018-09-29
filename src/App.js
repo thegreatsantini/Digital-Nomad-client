@@ -21,14 +21,15 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
-    
+
     this.getUser();
-   
+
   }
 
   getUser = () => {
     // get user
     let token = localStorage.getItem('loginToken');
+
     if (token) {
       // console.log(token)
       // there is a token in localStorage; validate it
@@ -61,14 +62,14 @@ export default class App extends Component {
       })
     }
   }
-  
+
   handleLogout = (e) => {
     console.log('logging out...');
     e.preventDefault();
     localStorage.removeItem('loginToken');
     this.props.updateUser();
   }
-  
+
   render() {
     const childProps = {
       // user: this.state.user,
@@ -81,8 +82,8 @@ export default class App extends Component {
     };
     return (
       <div className="App">
-              <Navigation user={this.state.id} updateUser={this.getUser} />
-              <Routes childProps={childProps} />
+        <Navigation user={this.state.id} updateUser={this.getUser} />
+        <Routes childProps={childProps} />
       </div>
     );
   }

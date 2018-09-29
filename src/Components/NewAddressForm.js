@@ -38,9 +38,12 @@ class NewAddressForm extends Component {
             }
         })
             .then(result => {
-                console.log('Success', result);
                 localStorage.setItem('loginToken', result.data);
                 this.props.updateUser();
+                Object.keys(this.state).map((key, index) => {
+                    this.setState({ [key]: "" });
+                });
+                // this.setState({form}, ()=> console.log(this.state));
             })
             .catch(err => {
                 console.log('Error', err);
