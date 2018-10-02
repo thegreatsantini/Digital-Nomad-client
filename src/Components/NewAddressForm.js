@@ -40,15 +40,19 @@ class NewAddressForm extends Component {
             .then(result => {
                 localStorage.setItem('loginToken', result.data);
                 this.props.updateUser();
-                Object.keys(this.state).map((key, index) => {
+                Object.keys(this.state).forEach((key, index) => {
                     this.setState({ [key]: "" });
                 });
-                // this.setState({form}, ()=> console.log(this.state));
             })
             .catch(err => {
                 console.log('Error', err);
             });
-    };
+        };
+        
+        componentDidMount() {
+            console.log('NewAddresFrom',this.props);
+
+    }
 
     render() {
         return (

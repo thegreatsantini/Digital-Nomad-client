@@ -35,7 +35,7 @@ export default class SendContactForm extends React.Component {
     }
 
     componentDidMount() {
-        // console.log(this.props.userId)
+        console.log('Send psotcard form', this.props.list)
     }
 
     postToDb = async (data) => {
@@ -99,13 +99,13 @@ export default class SendContactForm extends React.Component {
     };
 
     render() {
-        this
         return (
             <div>
                 <Form onSubmit={this.uploadWidget} horizontal>
                     <ContactTypeAhead
                         handleRecipientList={this.handleRecipientList}
                         userId={this.props.userId}
+                        contacts={this.props.list}
                     />
                     <FormGroup controlId="message">
                         <Col sm={5}>
