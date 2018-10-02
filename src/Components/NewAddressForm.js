@@ -139,7 +139,7 @@ class NewAddressForm extends Component {
 
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
-                            <Button type="submit">Add Address</Button>
+                            <Button  type="submit">Add Address</Button>
                         </Col>
                     </FormGroup>
                 </Form>
