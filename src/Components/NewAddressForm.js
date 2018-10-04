@@ -48,11 +48,6 @@ class NewAddressForm extends Component {
                 console.log('Error', err);
             });
         };
-        
-        componentDidMount() {
-            console.log('NewAddresFrom',this.props);
-
-    }
 
     render() {
         return (
@@ -143,7 +138,7 @@ class NewAddressForm extends Component {
 
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
-                            <Button  type="submit">Add Address</Button>
+                            <Button bsStyle="primary" type="submit">Add Address</Button>
                         </Col>
                     </FormGroup>
                 </Form>
