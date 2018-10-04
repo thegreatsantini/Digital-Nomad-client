@@ -17,7 +17,8 @@ export default ({ cards, handleRemove }) => {
                 <div style={button__container} >
                     <ThumbnailModal 
                       message={val.message} 
-                      recipients={val.recipients} 
+                      recipients={val.recipients}
+                      location={val.location}
                       />
                 <Button onClick={(e) => handleRemove(e, val._id)} bsSize="small">
                     <Glyphicon glyph="trash" />

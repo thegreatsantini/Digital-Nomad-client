@@ -33,7 +33,7 @@ export default class SentPostCards extends Component {
     const fetchSentCards = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/postcards/api/v1/${this.props.userId}`,
       { 'headers': { 'Authorization': `Bearer ${token}` } })
 
-    this.setState({ cards: fetchSentCards.data }, () => console.log(this.state.cards));
+    this.setState({ cards: fetchSentCards.data });
   };
 
   render() {

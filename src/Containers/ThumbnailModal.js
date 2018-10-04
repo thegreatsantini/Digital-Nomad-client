@@ -54,6 +54,7 @@ export default class ThumbnailModal extends Component {
             <p>
               {this.props.message}
             </p>
+            <h6>Sent from: {this.props.location}</h6>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleHide}>Close</Button>
