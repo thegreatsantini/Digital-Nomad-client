@@ -31,6 +31,7 @@ export default class LocationModal extends Component {
                 </Button>
 
                 <Modal
+                    onExited={ this.props.uploadWidget}
                     {...this.props}
                     show={this.state.show}
                     onHide={this.handleHide}

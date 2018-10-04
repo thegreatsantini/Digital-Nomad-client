@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Axios from "axios";
+// import Axios from "axios";
 import Select from 'react-select';
 
 
@@ -13,22 +13,27 @@ export default class ContactTypeAhead extends Component {
         };
     };
 
-    getContactList = async () => {
-        let token = localStorage.getItem('loginToken');
-        const contactsArray = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.userId}`,
-            {
-                'headers': { 'Authorization': `Bearer ${token}` }
-            })
-        const namesOnly = contactsArray.data.reduce((myArray, item) => {
-            myArray.push({ value: item.name, label: item.name });
-            return myArray
-        }, [])
-        this.setState({ names: namesOnly })
+    mapContacts = () => {
+        // let token = localStorage.getItem('loginToken');
+        // const contactsArray = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/${this.props.userId}`,
+        //     {
+        //         'headers': { 'Authorization': `Bearer ${token}` }
+        //     })
+        // const namesOnly = contactsArray.data.reduce((myArray, item) => {
+        //     myArray.push({ value: item.email, label: item.name });
+        //     return myArray
+        // }, [])
+        // this.setState({ names: namesOnly })
+
+        const data = this.props.contacts.reduce((myArray, item) => {
+                myArray.push({ value: item.email, label: item.name });
+                return myArray
+            }, [])
+            this.setState({names:data});
     };
 
     componentDidMount = () => {
-        console.log(this.props)
-        this.getContactList()
+        this.mapContacts()
     };
 
     render() {

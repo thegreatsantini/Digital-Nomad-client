@@ -15,9 +15,9 @@ export default class EditContactForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            name: this.props.location.state.name,
             street: '',
-            email: '',
+            email: this.props.location.state.email,
             city: '',
             zip: '',
             state: ''
@@ -25,21 +25,21 @@ export default class EditContactForm extends Component {
     }
 
     getUserData = async () => {
-        let token = localStorage.getItem('loginToken');
-        const getCurrentContact = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
-            {
-                'headers': { 'Authorization': `Bearer ${token}` }
-            });
-        const contactInfo = getCurrentContact.data;
-        this.setState({
-            name: contactInfo.name,
-            street: contactInfo.street,
-            city: contactInfo.city,
-            state: contactInfo.state,
-            zipcode: contactInfo.zipcode,
-            email: contactInfo.email,
-            userId: contactInfo.userId
-        })
+        // let token = localStorage.getItem('loginToken');
+        // const getCurrentContact = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
+        //     {
+        //         'headers': { 'Authorization': `Bearer ${token}` }
+        //     });
+        // const contactInfo = getCurrentContact.data;
+        // this.setState({
+        //     name: contactInfo.name,
+        //     street: contactInfo.street,
+        //     city: contactInfo.city,
+        //     state: contactInfo.state,
+        //     zipcode: contactInfo.zipcode,
+        //     email: contactInfo.email,
+        //     userId: contactInfo.userId
+        // })
     }
 
     componentDidMount = async () => {
@@ -54,8 +54,10 @@ export default class EditContactForm extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        const { contactId } = this.props.location.state;
+        
         let token = localStorage.getItem('loginToken');
-        const updateContact = await Axios.put(` ${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/update/${this.state.userId}`, this.state,
+        const updateContact = await Axios.put(` ${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/update/${contactId}`, this.state,
             {
                 'headers': { 'Authorization': `Bearer ${token}` }
             });
@@ -81,7 +83,7 @@ export default class EditContactForm extends Component {
                             />
                         </Col>
                     </FormGroup>
-                    <FormGroup controlId="street">
+                    {/* <FormGroup controlId="street">
                         <Col componentClass={ControlLabel} sm={2}>
                             Street
                         </Col>
@@ -135,7 +137,7 @@ export default class EditContactForm extends Component {
                                 placeholder="98028"
                             />
                         </Col>
-                    </FormGroup>
+                    </FormGroup> */}
 
                     <FormGroup controlId="email">
                         <Col componentClass={ControlLabel} sm={2}>
@@ -152,7 +154,7 @@ export default class EditContactForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
-                            <Button type="submit">Add Address</Button>
+                            <Button type="submit">Update Address</Button>
                         </Col>
                     </FormGroup>
                 </Form>

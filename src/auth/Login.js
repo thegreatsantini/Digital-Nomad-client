@@ -32,14 +32,14 @@ class Login extends Component {
                 localStorage.setItem('loginToken', result.data.token);
                 // update user with a call to App.js
                 this.props.updateUser();
-                return (<Redirect to="/" />);
                 // this.props.history.push("/")
             })
             .catch(err => { console.log('Error', err); });
     }
 
     render() {
-        if (this.props.user) {
+        
+        if (this.props.id) {
             return (<Redirect to="/" />);
         }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import SentPostCards from '../Containers/SentPostCards';
+import { Redirect } from 'react-router-dom'
 
 export default class Profile extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class Profile extends Component {
     renderProfilePage = () => {
         return (
             <React.Fragment>
-                {/* <Image src={ testProfile } rounded alt='avatar' /> */}
+                {/* <Image src={ testProfile } rounded alt='avatar' />
                 < ListGroup >
                     <ListGroupItem>Name: {this.props.name} </ListGroupItem>
                     <ListGroupItem>Email: {this.props.email} </ListGroupItem>
@@ -25,9 +26,10 @@ export default class Profile extends Component {
                     onClick={() => this.setState({ editUser: true })}
                 >
                     Update Info
-                </Button>
-                <SentPostCards 
-                    userId={this.props.id} 
+                </Button> */}
+                <SentPostCards
+                    userId={this.props.id}
+                    updateUser={this.props.updateUser}
                 />
             </React.Fragment>
         );
@@ -35,9 +37,7 @@ export default class Profile extends Component {
 
     renderLoading = () => {
         return (
-            <React.Fragment>
-                <h3>Loading...</h3>
-            </React.Fragment>
+            <Redirect to='/' />
         )
     }
 
@@ -47,8 +47,8 @@ export default class Profile extends Component {
             <React.Fragment>
                 {
                     this.props.id
-                    ? this.renderProfilePage()
-                    : this.renderLoading()
+                        ? this.renderProfilePage()
+                        : this.renderLoading()
                 }
             </React.Fragment>
         )

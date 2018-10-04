@@ -28,15 +28,14 @@ export default class Home extends Component {
     }
 
     renderUser = () => {
-        // console.log('Home', this.props)
         return (
             <div>
-                <Jumbotron>
+                {/* <Jumbotron>
                     <h1>Hello, {this.props.name}</h1>
                     <p>
                         Send digital postcards to your friends and family
                     </p>
-                </Jumbotron>
+                </Jumbotron> */}
                 <Tabs
                     activeKey={this.state.key}
                     onSelect={this.handleSelect}
@@ -49,10 +48,10 @@ export default class Home extends Component {
                             updateUser={this.props.updateUser}
                         />
 
-                        <NewAddressForm
+                        {/* <NewAddressForm
                             id={this.props.id}
                             updateUser={this.props.updateUser}
-                        />
+                        /> */}
 
                     </Tab>
                     <Tab onClick={this.turnOnLocator} eventKey={2} title="Send post card">

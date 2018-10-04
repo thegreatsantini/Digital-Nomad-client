@@ -21,20 +21,23 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
-    console.log(process.env.REACT_APP_DEV_SERVER)
+
     this.getUser();
+
   }
 
   getUser = () => {
     // get user
     let token = localStorage.getItem('loginToken');
+
     if (token) {
+      // console.log(token)
       // there is a token in localStorage; validate it
       axios.post(process.env.REACT_APP_DEV_SERVER + '/auth/me/from/token', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => {
-          // console.log("User ", response.data.user)
+          // console.log("Success: User is", response.data.user)
           this.setState({
             user: response.data.user,
             name: response.data.user.name,
@@ -55,7 +58,7 @@ export default class App extends Component {
       console.log('No token was found');
       localStorage.removeItem('loginToken');
       this.setState({
-        user: null
+        id: null
       })
     }
   }
@@ -65,7 +68,7 @@ export default class App extends Component {
     e.preventDefault();
     localStorage.removeItem('loginToken');
     this.props.updateUser();
-}
+  }
 
   render() {
     const childProps = {
@@ -79,8 +82,8 @@ export default class App extends Component {
     };
     return (
       <div className="App">
-              <Navigation user={this.state.user} updateUser={this.getUser} />
-              <Routes childProps={childProps} />
+        <Navigation user={this.state.id} updateUser={this.getUser} />
+        <Routes childProps={childProps} />
       </div>
     );
   }
