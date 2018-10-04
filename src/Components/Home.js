@@ -30,12 +30,6 @@ export default class Home extends Component {
     renderUser = () => {
         return (
             <div>
-                {/* <Jumbotron>
-                    <h1>Hello, {this.props.name}</h1>
-                    <p>
-                        Send digital postcards to your friends and family
-                    </p>
-                </Jumbotron> */}
                 <Tabs
                     activeKey={this.state.key}
                     onSelect={this.handleSelect}
@@ -48,10 +42,10 @@ export default class Home extends Component {
                             updateUser={this.props.updateUser}
                         />
 
-                        {/* <NewAddressForm
+                        <NewAddressForm
                             id={this.props.id}
                             updateUser={this.props.updateUser}
-                        /> */}
+                        />
 
                     </Tab>
                     <Tab onClick={this.turnOnLocator} eventKey={2} title="Send post card">
@@ -60,9 +54,6 @@ export default class Home extends Component {
                             userId={this.props.id}
                             updateUser={this.props.updateUser}
                         />
-                    </Tab>
-                    <Tab eventKey={3} title="Settings">
-                        Settings
                     </Tab>
                 </Tabs>
             </div>
