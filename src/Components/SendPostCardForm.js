@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import ContactTypeAhead from "../Containers/ContactTypeAhead";
 import LocationModal from '../Containers/LocationModal';
+import { Redirect } from 'react-router-dom';
 
 var options = {
     enableHighAccuracy: true,
@@ -49,8 +50,7 @@ export default class SendContactForm extends React.Component {
         }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
-        localStorage.setItem('loginToken', postReq.data);
-        this.props.updateUser();
+        return(<Redirect to='/'/>)
     }
 
     success = async (pos) => {
@@ -58,6 +58,7 @@ export default class SendContactForm extends React.Component {
         const crd = navigator.geolocation.getCurrentPosition((info) => console.log(info));
         // const userLocation = await Axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${crd.latitude},${crd.longitude}&sensor=true`);
         console.log(crd)
+        return;
         // const formatedLocation = userLocation.data.results[2].formatted_address;
         // this.setState({ location: formatedLocation }, ()=> console.log(this.state.location))
     };
@@ -85,7 +86,8 @@ export default class SendContactForm extends React.Component {
     };
 
     uploadWidget = async (e) => {
-        e.preventDefault();
+        if (e.target) e.preventDefault();
+        
         await window.cloudinary.openUploadWidget({ cloud_name: `${process.env.REACT_APP_CLOUD_NAME}`, upload_preset: 'phaqrdzz', tags: ['testing'] },
             (error, result) => {
                 if (error) { console.log('Couldn\'t post to Cloudinary', error) }
@@ -141,10 +143,11 @@ export default class SendContactForm extends React.Component {
                                 type="submit"
                             // onClick={this.findLocation}
                             >
-                                Send with current location
+                                this will send with current location
                             </Button>
 
                             <LocationModal
+                                uploadWidget={this.uploadWidget}
                                 onChange={this.handleChange}
                             />
                         </div>
