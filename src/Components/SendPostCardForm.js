@@ -50,25 +50,9 @@ export default class SendContactForm extends React.Component {
         }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
-        return(<Redirect to='/'/>)
-    }
-
-    success = async (pos) => {
-        // const crd = pos.coords;
-        const crd = navigator.geolocation.getCurrentPosition((info) => console.log(info));
-        // const userLocation = await Axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${crd.latitude},${crd.longitude}&sensor=true`);
-        console.log(crd)
-        return;
-        // const formatedLocation = userLocation.data.results[2].formatted_address;
-        // this.setState({ location: formatedLocation }, ()=> console.log(this.state.location))
-    };
-
-    error = (err) => {
-        console.warn(`ERROR(${err}): ${err}`);
-    }
-
-    findLocation = () => {
-        navigator.geolocation.watchPosition(this.success, this.error, options);
+            Object.keys(this.state).forEach((key, index) => {
+                this.setState({ [key]: "" });
+            });
     }
 
     handleRecipientList = (e) => {
@@ -119,34 +103,19 @@ export default class SendContactForm extends React.Component {
                             </Col>
                         </FormGroup>
 
-                        <Button
-
-                            onClick={this.findLocation}
-                        >
-                            Test location func
-                            </Button>
-
-                        {/* <FormGroup controlId="location">
-                            <Col sm={5}>
-                                <ControlLabel>Your Location</ControlLabel>
-                                <FormControl
-                                    componentClass="input"
-                                    placeholder="Your Location"
-                                    value={this.state.location}
-                                />
-                            </Col> 
-                        </FormGroup> */}
 
                         <div style={button__group}>
 
                             <Button
+                            bsStyle="primary"
                                 type="submit"
                             // onClick={this.findLocation}
                             >
-                                this will send with current location
+                                send with current location
                             </Button>
 
                             <LocationModal
+                            bsStyle="primary"
                                 uploadWidget={this.uploadWidget}
                                 onChange={this.handleChange}
                             />
