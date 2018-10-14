@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import PostCardsThumbnails from './PostCardsThumbnails';
+import PostCardsThumbnails from '../Components/PostCardsThumbnails';
 
 export default class SentPostCards extends Component {
   constructor(props) {
