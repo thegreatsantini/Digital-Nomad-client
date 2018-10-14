@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
-import Home from './Components/Home';
-import Profile from './Components/Profile';
+import Home from './Containers/Home';
+import Profile from './Containers/Profile';
 import EditContactForm from './Components/EditContactForm';
 import SandBox from './SandBox';
 import AppliedRoute from './Components/AppliedRoute';
-import NotFound from './Containers/NotFound';
+import NotFound from './Components/NotFound';
 
 
 export default ({ childProps }) => 

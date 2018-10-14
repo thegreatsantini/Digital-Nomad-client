@@ -7,7 +7,7 @@ import {
     FormControl,
     Col
 } from 'react-bootstrap';
-import ContactTypeAhead from "./Containers/ContactTypeAhead";
+import ContactTypeAhead from "./Components/ContactTypeAhead";
 
 
 export default class SandBox extends React.Component {
