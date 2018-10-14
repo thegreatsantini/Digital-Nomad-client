@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "cloudinary-react": "^1.0.6",
     "dotenv": "^6.0.0",
+    "opencage-api-client": "^0.3.0",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
