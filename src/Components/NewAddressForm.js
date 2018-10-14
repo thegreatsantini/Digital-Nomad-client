@@ -66,61 +66,6 @@ class NewAddressForm extends Component {
                             />
                         </Col>
                     </FormGroup>
-                    <FormGroup controlId="street">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            Street
-                        </Col>
-                        <Col sm={5}>
-                            <FormControl
-                                value={this.state.street}
-                                onChange={this.handleChange}
-                                type="text"
-                                placeholder="Drury Lane"
-                            />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="city">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            City
-                        </Col>
-                        <Col sm={5}>
-                            <FormControl
-                                value={this.state.city}
-                                onChange={this.handleChange}
-                                type="text"
-                                placeholder="Prince Edwards Kingdom"
-                            />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="state">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            State
-                        </Col>
-                        <Col sm={5}>
-                            <FormControl
-                                value={this.state.state}
-                                onChange={this.handleChange}
-                                type="text"
-                                placeholder="La La Land"
-                            />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="zipcode">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            ZipCode
-                        </Col>
-                        <Col sm={5}>
-                            <FormControl
-                                value={this.state.zipcode}
-                                onChange={this.handleChange}
-                                type="text"
-                                placeholder="98028"
-                            />
-                        </Col>
-                    </FormGroup>
 
                     <FormGroup controlId="email">
                         <Col componentClass={ControlLabel} sm={2}>

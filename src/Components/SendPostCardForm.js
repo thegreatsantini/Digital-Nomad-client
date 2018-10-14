@@ -10,8 +10,8 @@ import {
     Glyphicon,
     Well
 } from 'react-bootstrap';
-import ContactTypeAhead from "../Containers/ContactTypeAhead";
-import LocationModal from '../Containers/LocationModal';
+import ContactTypeAhead from "../Components/ContactTypeAhead";
+import LocationModal from '../Components/LocationModal';
 import { Redirect } from 'react-router-dom';
 
 var options = {
