@@ -1,67 +1,85 @@
 import React from "react";
-import {
-    FormGroup,
-    ControlLabel,
-    Button,
-    Form,
-    FormControl,
-    Col
-} from 'react-bootstrap';
-import ContactTypeAhead from "./Components/ContactTypeAhead";
+import { Form, FormGroup, FormControl, ControlLabel, Row, Col, InputGroup } from 'react-bootstrap';
+import opencage from "opencage-api-client";
+
 
 
 export default class SandBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipients: [],
-            message: '',
+            location: " my locations"
         };
     }
 
-    handleRecipientList = (e) => {
-        const onlyNames = e.reduce((acc, next) => {
-            acc.push(next['value'])
-            return acc
-        }, [])
-        this.setState({ recipients: onlyNames })
-    }
-
     handleChange = event => {
-        console.log(event.target.id)
         this.setState({
-        [event.target.id] : event.target.value,
+            location: event.target.value,
         });
     };
 
-    
+    //     city: "Kenmore"
+    // country: "États-Unis d'Amérique"
+    // country_code: "us"
+    // county: "King County"
+    // house_number: "6703"
+    // postcode: "98028"
+    // road: "Northeast 182nd Street"
+    // state: "Washington"
+    // state_code: "WA"
+
+    componentDidMount = async () => {
+
+        let lat;
+        let long;
+        navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            opencage.geocode({ q: `${lat}, ${long}`, language: 'fr', key: process.env.REACT_APP_OCD_API_KEY }).then(data => {
+                if (data.status.code == 200) {
+                    if (data.results.length > 0) {
+                        return data.results[0].components;
+                    }
+                } else {
+                    console.log('error', data.status.message);
+                }
+            }).then(data => {
+                const { city, house_number, road, state } = data;
+                this.setState({
+                    location: `${house_number} ${road}, ${city} ${state}`
+                })
+                console.log(data)
+            }).catch(error => {
+                console.log('error', error.message);
+            });
+            // do_something(position.coords.latitude, position.coords.longitude);
+        });
+
+
+
+    }
+
 
     render() {
+        // let location = this.state.locatio
         return (
             <div>
-                <Form onSubmit={this.uploadWidget} horizontal>
-                <ContactTypeAhead 
-                    handleRecipientList={this.handleRecipientList} 
-                    userID={this.props.userID}
-                    />
-                    
-                    <FormGroup controlId="message">
-                        <Col sm={5}>
-                            <ControlLabel>Message</ControlLabel>
-                            <FormControl
-                                onChange={this.handleChange}
-                                componentClass="textarea" 
-                                placeholder="Message" 
-                                />
-                            </Col>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Col smOffset={2} sm={10}>
-                            <Button type="submit">Send Card</Button>
-                        </Col>
-                    </FormGroup>
-                    </Form>
+                <Row>
+                    <Col xs={8} md={6} >
+                        <Form>
+                            <InputGroup>
+                                <InputGroup.Addon >Edit Location</InputGroup.Addon>
+                                <FormGroup controlId="formInlineName">
+                                    <FormControl
+                                        onChange={this.handleChange}
+                                        value={this.state.location}
+                                        type="text"
+                                    />
+                                </FormGroup>
+                            </InputGroup>
+                        </Form>
+                    </Col>
+                </Row>
             </div>
         );
     }
