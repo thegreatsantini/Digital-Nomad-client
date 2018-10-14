@@ -4,25 +4,28 @@ import {
     FormGroup,
     ControlLabel,
     Button,
+    Row,
     Form,
     FormControl,
     Col,
     Glyphicon,
-    Well
+    Well,
+    InputGroup
 } from 'react-bootstrap';
 import ContactTypeAhead from "../Components/ContactTypeAhead";
-import LocationModal from '../Components/LocationModal';
-import { Redirect } from 'react-router-dom';
+import opencage from "opencage-api-client";
 
-var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-};
 
-const button__group = {
+const container = {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+
+}
+
+const contactAhead = {
+    margin: '0 auto',
+    width: "550px",
+    padding: " 15px"
 }
 
 
@@ -34,6 +37,33 @@ export default class SendContactForm extends React.Component {
             location: null,
             message: '',
         };
+    }
+
+    componentDidMount() {
+        let lat;
+        let long;
+        navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            opencage.geocode({ q: `${lat}, ${long}`, language: 'fr', key: process.env.REACT_APP_OCD_API_KEY }).then(data => {
+                if (data.status.code == 200) {
+                    if (data.results.length > 0) {
+
+                        return data.results[0].components;
+                    }
+                } else {
+                    console.log('error', data.status.message);
+                }
+            }).then(data => {
+                const { city, house_number, road, state } = data;
+                this.setState({
+                    location: `${house_number} ${road}, ${city} ${state}`
+                })
+                console.log(data)
+            }).catch(error => {
+                console.log('error', error.message);
+            });
+        })
     }
 
     postToDb = async (data) => {
@@ -50,9 +80,9 @@ export default class SendContactForm extends React.Component {
         }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
-            Object.keys(this.state).forEach((key, index) => {
-                this.setState({ [key]: "" });
-            });
+        Object.keys(this.state).forEach((key, index) => {
+            this.setState({ [key]: "" });
+        });
     }
 
     handleRecipientList = (e) => {
@@ -71,7 +101,7 @@ export default class SendContactForm extends React.Component {
 
     uploadWidget = async (e) => {
         if (e.target) e.preventDefault();
-        
+
         await window.cloudinary.openUploadWidget({ cloud_name: `${process.env.REACT_APP_CLOUD_NAME}`, upload_preset: 'phaqrdzz', tags: ['testing'] },
             (error, result) => {
                 if (error) { console.log('Couldn\'t post to Cloudinary', error) }
@@ -83,47 +113,48 @@ export default class SendContactForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <Well>
-                    <Form onSubmit={this.uploadWidget} horizontal>
+            <Well>
+                <Form onSubmit={this.uploadWidget} horizontal>
+                    
+                    <div style={container}>
+                        <FormGroup controlId="message">
+                            <FormControl
+                                onChange={this.handleChange}
+                                componentClass="textarea"
+                                placeholder="Message"
+                            />
+                        </FormGroup>
+                    </div>
 
+                    <div style={container} >
+                        <FormGroup controlId='location'>
+                            <InputGroup>
+                                <InputGroup.Addon >Edit Location</InputGroup.Addon>
+                                <FormControl
+                                    onChange={this.handleChange}
+                                    value={this.state.location}
+                                    type="text"
+                                />
+                            </InputGroup>
+                        </FormGroup>
+                    </div>
+
+                    <div style={contactAhead}>
                         <ContactTypeAhead
                             handleRecipientList={this.handleRecipientList}
                             userId={this.props.userId}
                             contacts={this.props.list}
                         />
-                        <FormGroup controlId="message">
-                            <Col sm={5}>
-                                <ControlLabel>Message</ControlLabel>
-                                <FormControl
-                                    onChange={this.handleChange}
-                                    componentClass="textarea"
-                                    placeholder="Message"
-                                />
-                            </Col>
-                        </FormGroup>
+                    </div>
 
-
-                        <div style={button__group}>
-
-                            <Button
-                            bsStyle="primary"
-                                type="submit"
-                            // onClick={this.findLocation}
-                            >
-                                send with current location
-                            </Button>
-
-                            <LocationModal
-                            bsStyle="primary"
-                                uploadWidget={this.uploadWidget}
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                    </Form>
-                </Well>
-
-            </div>
+                    <Button
+                        bsStyle="primary"
+                        type="submit"
+                    >
+                        send
+                    </Button>
+                </Form>
+            </Well>
         )
     }
 }
