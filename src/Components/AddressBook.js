@@ -12,7 +12,7 @@ import axios from 'axios';
 
 const tableContainer = {
     margin: "0 auto",
-    padding: "10px 20%",
+    padding: "10px 12%",
     overflow: "scroll",
     height: "300px"
 }
@@ -38,7 +38,7 @@ export default ({ list, userId, updateUser }) => {
         const getName = (name, index) => name.split(" ")[index];
         return (
             <tr>
-                <td>{i + 1}</td>
+                {/* <td>{i + 1}</td> */}
                 <td>{getName(val.name, 0)}</td>
                 <td>{getName(val.name, 1)}</td>
                 <td>{val.email} </td>
@@ -69,7 +69,7 @@ export default ({ list, userId, updateUser }) => {
             <Table responsive striped bordered condensed hover >
                 <thead>
                     <tr>
-                        <th>#</th>
+                        {/* <th>#</th> */}
                         <th>First</th>
                         <th>Last</th>
                         <th>email</th>
