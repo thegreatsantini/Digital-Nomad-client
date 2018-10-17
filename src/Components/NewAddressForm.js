@@ -9,6 +9,7 @@ import {
     Col
 } from 'react-bootstrap';
 
+
 class NewAddressForm extends Component {
     constructor(props) {
         super(props);
@@ -47,36 +48,31 @@ class NewAddressForm extends Component {
             .catch(err => {
                 console.log('Error', err);
             });
-        };
+    };
 
     render() {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit} horizontal>
+
                     <FormGroup controlId="name">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            Full Name
-                        </Col>
                         <Col sm={5}>
                             <FormControl
                                 value={this.state.name}
                                 onChange={this.handleChange}
                                 type="text"
-                                placeholder="Muffin Man"
+                                placeholder="Full Name"
                             />
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="email">
-                        <Col componentClass={ControlLabel} sm={2}>
-                            Email
-                        </Col>
                         <Col sm={5}>
                             <FormControl
                                 value={this.state.email}
                                 onChange={this.handleChange}
                                 type="email"
-                                placeholder="muffins@yum.com"
+                                placeholder="johnnyappleseed@gmail.com"
                             />
                         </Col>
                     </FormGroup>
