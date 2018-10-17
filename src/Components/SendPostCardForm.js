@@ -24,7 +24,7 @@ const container = {
 
 const contactAhead = {
     margin: '0 auto',
-    width: "550px",
+    width: "75vw",
     padding: " 15px"
 }
 
@@ -129,7 +129,7 @@ export default class SendContactForm extends React.Component {
                     <div style={container} >
                         <FormGroup controlId='location'>
                             <InputGroup>
-                                <InputGroup.Addon >Edit Location</InputGroup.Addon>
+                                <InputGroup.Addon >Location</InputGroup.Addon>
                                 <FormControl
                                     onChange={this.handleChange}
                                     value={this.state.location}
