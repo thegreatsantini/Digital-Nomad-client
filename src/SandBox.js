@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, FormControl, ControlLabel, Row, Col, InputGroup } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Row, Col, InputGroup } from 'react-bootstrap';
 import opencage from "opencage-api-client";
 
 
@@ -36,7 +36,7 @@ export default class SandBox extends React.Component {
             lat = position.coords.latitude;
             long = position.coords.longitude;
             opencage.geocode({ q: `${lat}, ${long}`, language: 'fr', key: process.env.REACT_APP_OCD_API_KEY }).then(data => {
-                if (data.status.code == 200) {
+                if (data.status.code === 200) {
                     if (data.results.length > 0) {
                         return data.results[0].components;
                     }

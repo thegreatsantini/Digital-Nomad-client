@@ -24,7 +24,7 @@ export default ({ list, userId, updateUser }) => {
         e.preventDefault()
         const token = localStorage.getItem('loginToken');
 
-        const response = await axios({
+        await axios({
             method: 'DELETE',
             url: `${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/${userId}/remove/${val}`,
             headers: { 'Authorization': `Bearer ${token}` },

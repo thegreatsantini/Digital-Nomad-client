@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Axios from "axios";
 import {
     FormGroup,
-    ControlLabel,
     Button,
     Form,
     FormControl,

@@ -2,13 +2,9 @@ import React from "react";
 import Axios from "axios";
 import {
     FormGroup,
-    ControlLabel,
     Button,
-    Row,
     Form,
     FormControl,
-    Col,
-    Glyphicon,
     Well,
     InputGroup
 } from 'react-bootstrap';
@@ -46,7 +42,7 @@ export default class SendContactForm extends React.Component {
             lat = position.coords.latitude;
             long = position.coords.longitude;
             opencage.geocode({ q: `${lat}, ${long}`, language: 'fr', key: process.env.REACT_APP_OCD_API_KEY }).then(data => {
-                if (data.status.code == 200) {
+                if (data.status.code === 200) {
                     if (data.results.length > 0) {
 
                         return data.results[0].components;
@@ -71,7 +67,7 @@ export default class SendContactForm extends React.Component {
         let token = localStorage.getItem('loginToken');
         const getLocation = this.state.location || await this.findLocation();
 
-        const postReq = await Axios.post(`${process.env.REACT_APP_DEV_SERVER}/postcards/api/v1/${this.props.userId}/add/`, {
+        await Axios.post(`${process.env.REACT_APP_DEV_SERVER}/postcards/api/v1/${this.props.userId}/add/`, {
             imgUrl: data,
             recipients: this.state.recipients,
             message: this.state.message,
@@ -115,7 +111,7 @@ export default class SendContactForm extends React.Component {
         return (
             <Well>
                 <Form onSubmit={this.uploadWidget} horizontal>
-                    
+
                     <div style={container}>
                         <FormGroup controlId="message">
                             <FormControl
