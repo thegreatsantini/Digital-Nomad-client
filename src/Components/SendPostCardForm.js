@@ -138,7 +138,6 @@ export default class SendContactForm extends React.Component {
                     <div style={contactAhead}>
                         <ContactTypeAhead
                             handleRecipientList={this.handleRecipientList}
-                            userId={this.props.userId}
                             contacts={this.props.list}
                         />
                     </div>
