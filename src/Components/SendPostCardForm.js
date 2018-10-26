@@ -86,7 +86,7 @@ export default class SendContactForm extends React.Component {
             acc.push(next['value'])
             return acc
         }, [])
-        this.setState({ recipients: onlyNames })
+        this.setState({ recipients: onlyNames})
     }
 
     handleChange = event => {
