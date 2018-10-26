@@ -3,6 +3,7 @@ import { Tab, Tabs, Jumbotron } from 'react-bootstrap';
 import AddressBook from '../Components/AddressBook'
 import SendPostCardForm from '../Components/SendPostCardForm';
 import NewAddressForm from '../Components/NewAddressForm';
+import AlertMessage from '../Components/AlertMessage';
 
 export default class Home extends Component {
     constructor(props) {
@@ -11,9 +12,18 @@ export default class Home extends Component {
         this.handleSelect = this.handleSelect.bind(this);
 
         this.state = {
-            key: 1
+            key: 1,
+            showAlert:false
         };
     }
+
+    toggleAlert = (type) => {
+        this.setState({
+            showAlert: true
+        });
+        setTimeout(()=> this.setState({showAlert:false}), 2000)
+    }
+
     renderLandingPage = () => {
         return (
             <div>
@@ -30,6 +40,11 @@ export default class Home extends Component {
     renderUser = () => {
         return (
             <div>
+                <AlertMessage 
+                    show={this.state.showAlert} 
+                    status={'success'} 
+                    message={"successfully added a new contact"}
+                />
                 <Tabs
                     activeKey={this.state.key}
                     onSelect={this.handleSelect}
@@ -45,6 +60,7 @@ export default class Home extends Component {
                         <NewAddressForm
                             id={this.props.id}
                             updateUser={this.props.updateUser}
+                            toggleAlert={this.toggleAlert}
                         />
 
                     </Tab>

@@ -40,6 +40,7 @@ class NewAddressForm extends Component {
             .then(result => {
                 localStorage.setItem('loginToken', result.data);
                 this.props.updateUser();
+                this.props.toggleAlert();
                 Object.keys(this.state).forEach((key, index) => {
                     this.setState({ [key]: "" });
                 });

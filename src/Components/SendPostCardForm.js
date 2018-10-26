@@ -55,7 +55,6 @@ export default class SendContactForm extends React.Component {
                 this.setState({
                     location: `${house_number} ${road}, ${city} ${state}`
                 })
-                console.log(data)
             }).catch(error => {
                 console.log('error', error.message);
             });
