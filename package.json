@@ -13,7 +13,7 @@
     "react-dom": "^16.4.1",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.0.0",
     "react-scrollbar": "^0.5.4",
     "react-select": "^2.0.0"
   },
@@ -23,5 +23,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy" : "http://localhost:8080"
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -51,7 +51,6 @@ class Login extends Component {
     axios
       .post(process.env.REACT_APP_DEV_SERVER + "/auth/login", this.state)
       .then(result => {
-        console.log("Success", result.data);
         // add newly-received token to localStorage
         localStorage.setItem("loginToken", result.data.token);
         // update user with a call to App.js

@@ -57,11 +57,10 @@ export default class EditContactForm extends Component {
         const { contactId } = this.props.location.state;
         
         let token = localStorage.getItem('loginToken');
-        const updateContact = await Axios.put(` ${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/update/${contactId}`, this.state,
+        await Axios.put(` ${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contacts/update/${contactId}`, this.state,
             {
                 'headers': { 'Authorization': `Bearer ${token}` }
             });
-        console.log(updateContact.data)
         this.props.updateUser()
         window.location = `${window.location.origin}/`;
     }

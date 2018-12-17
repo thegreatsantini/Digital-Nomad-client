@@ -52,12 +52,10 @@ export default class SignUp extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log("Form submitted");
 
     axios
       .post(process.env.REACT_APP_DEV_SERVER + "/auth/signup", this.state)
       .then(result => {
-        console.log("Successfully added user to db");
         // add newly-received token to localStorage
         localStorage.setItem("loginToken", result.data.token);
         // update user with a call to App.js

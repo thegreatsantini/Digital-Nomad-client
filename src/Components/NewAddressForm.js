@@ -14,7 +14,6 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '10px',
-        border : 'solid blue 2px'
     }
 }
 

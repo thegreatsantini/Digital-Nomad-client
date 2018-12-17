@@ -9,7 +9,6 @@ import { Navbar, NavItem, Nav } from 'react-bootstrap';
 export default ({ user, updateUser }) =>  {
 
     const handleLogout = (e) => {
-        console.log('logging out...');
         e.preventDefault();
         localStorage.removeItem('loginToken');
         updateUser();

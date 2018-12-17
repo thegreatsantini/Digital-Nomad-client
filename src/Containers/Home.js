@@ -5,12 +5,6 @@ import SendPostCardForm from "../Components/SendPostCardForm";
 import NewAddressForm from "../Components/NewAddressForm";
 import AlertMessage from "../Components/AlertMessage";
 
-const styles = {
-  addressTabContainer: {
-    border: "solid red 2px"
-  }
-};
-
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +61,7 @@ export default class Home extends Component {
           id="controlled-tab-example"
         >
           <Tab eventKey={1} title="Address Book">
-            <div style={styles.addressTabContainer}>
+            <div>
               <AddressBook
                 list={this.props.savedContacts}
                 toggleAlert={this.toggleAlert}
