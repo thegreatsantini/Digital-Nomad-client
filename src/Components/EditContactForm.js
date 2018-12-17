@@ -25,21 +25,21 @@ export default class EditContactForm extends Component {
     }
 
     getUserData = async () => {
-        // let token = localStorage.getItem('loginToken');
-        // const getCurrentContact = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
-        //     {
-        //         'headers': { 'Authorization': `Bearer ${token}` }
-        //     });
-        // const contactInfo = getCurrentContact.data;
-        // this.setState({
-        //     name: contactInfo.name,
-        //     street: contactInfo.street,
-        //     city: contactInfo.city,
-        //     state: contactInfo.state,
-        //     zipcode: contactInfo.zipcode,
-        //     email: contactInfo.email,
-        //     userId: contactInfo.userId
-        // })
+        let token = localStorage.getItem('loginToken');
+        const getCurrentContact = await Axios.get(`${process.env.REACT_APP_DEV_SERVER}/addressbook/api/v1/contact/${window.location.href.split('/')[5]}`,
+            {
+                'headers': { 'Authorization': `Bearer ${token}` }
+            });
+        const contactInfo = getCurrentContact.data;
+        this.setState({
+            name: contactInfo.name,
+            street: contactInfo.street,
+            city: contactInfo.city,
+            state: contactInfo.state,
+            zipcode: contactInfo.zipcode,
+            email: contactInfo.email,
+            userId: contactInfo.userId
+        })
     }
 
     componentDidMount = async () => {
