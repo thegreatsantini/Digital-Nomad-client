@@ -72,13 +72,11 @@ export default class App extends Component {
 
   render() {
     const childProps = {
-      // user: this.state.user,
       name: this.state.name,
       id: this.state.id,
       savedContacts: this.state.savedContacts,
       updateUser: this.getUser,
       email: this.state.email,
-      // thing : 'This is from App.js'
     };
     return (
       <div className="App">
