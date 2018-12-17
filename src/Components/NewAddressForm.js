@@ -8,6 +8,15 @@ import {
     Col
 } from 'react-bootstrap';
 
+const styles = {
+    formContainer : {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '10px',
+        border : 'solid blue 2px'
+    }
+}
 
 class NewAddressForm extends Component {
     constructor(props) {
@@ -40,7 +49,7 @@ class NewAddressForm extends Component {
             .then(result => {
                 localStorage.setItem('loginToken', result.data);
                 this.props.updateUser();
-                this.props.toggleAlert();
+                this.props.toggleAlert('added');
                 Object.keys(this.state).forEach((key, index) => {
                     this.setState({ [key]: "" });
                 });
@@ -52,11 +61,10 @@ class NewAddressForm extends Component {
 
     render() {
         return (
-            <div>
-                <Form onSubmit={this.handleSubmit} horizontal>
-
+            <div style={styles.formContainer}>
+                <Form onSubmit={this.handleSubmit} >
                     <FormGroup controlId="name">
-                        <Col sm={5}>
+                        <Col >
                             <FormControl
                                 value={this.state.name}
                                 onChange={this.handleChange}
@@ -67,7 +75,7 @@ class NewAddressForm extends Component {
                     </FormGroup>
 
                     <FormGroup controlId="email">
-                        <Col sm={5}>
+                        <Col >
                             <FormControl
                                 value={this.state.email}
                                 onChange={this.handleChange}
@@ -78,7 +86,7 @@ class NewAddressForm extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Col smOffset={2} sm={10}>
+                        <Col >
                             <Button bsStyle="primary" type="submit">Add Address</Button>
                         </Col>
                     </FormGroup>
